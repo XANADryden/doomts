@@ -1,7 +1,7 @@
 # doomjs
 
 
-This is a project to port the id tech 1 (original doom) engine to js.
+This is a project to port the id tech 1 (original doom) engine to typescript.  It was made after we realized how difficult accurate C to JS translation is.
 
 WE NEED HELP.  We can't do this alone.  If you want to contribute, just make a pull request.  
 
