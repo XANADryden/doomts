@@ -99,7 +99,9 @@ function CYMTOF(y :bigint) :bigint {return(f_y + (f_h - MTOF((y)-m_y)))}
 // the following is crap
 const LINE_NEVERSEE = ML_DONTDRAW;
 //:::CONTINUE:::
-type struct
+//type fpoint_t = bigint[2]
+xy_type="x"|"y";
+type fpoint_t = Record<xy_type,bigint>;
 {
     int x, y;
 } fpoint_t;
