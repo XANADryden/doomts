@@ -1,105 +1,105 @@
 //#include <stdio.h>
 
-import "./z_zone.h.ts"
-import "./doomdef.h.ts"
-import "./st_stuff.h.ts"
-import "./p_local.h.ts"
-import "./w_wad.h.ts"
+import "./z_zone.h.ts";
+import "./doomdef.h.ts";
+import "./st_stuff.h.ts";
+import "./p_local.h.ts";
+import "./w_wad.h.ts";
 
-import "./m_cheat.h.ts"
-import "./i_system.h.ts"
+import "./m_cheat.h.ts";
+import "./i_system.h.ts";
 
 // Needs access to LFB.
-import "./v_video.h.ts"
+import "./v_video.h.ts";
 
 // State.
-import "./doomstat.h.ts"
-import "./r_state.h.ts"
+import "./doomstat.h.ts";
+import "./r_state.h.ts";
 
 // Data.
-import "./dstrings.h.ts"
+import "./dstrings.h.ts";
 
-import "./am_map.h.ts"
+import "./am_map.h.ts";
 
 
 // For use if I do walls with outsides/insides
-#define REDS		(256-5*16)
-#define REDRANGE	16
-#define BLUES		(256-4*16+8)
-#define BLUERANGE	8
-#define GREENS		(7*16)
-#define GREENRANGE	16
-#define GRAYS		(6*16)
-#define GRAYSRANGE	16
-#define BROWNS		(4*16)
-#define BROWNRANGE	16
-#define YELLOWS		(256-32+7)
-#define YELLOWRANGE	1
-#define BLACK		0
-#define WHITE		(256-47)
+const REDS:        bigint = (256-5*16);
+const REDRANGE:    bigint =	16;
+const BLUES:       bigint = (256-4*16+8);
+const BLUERANGE:   bigint = 8;
+const GREENS:      bigint = (7*16);
+const GREENRANGE:  bigint = 16;
+const GRAYS:       bigint = (6*16);
+const GRAYSRANGE:  bigint = 16;
+const BROWNS:      bigint = (4*16);
+const BROWNRANGE:  bigint = 16;
+const YELLOWS:     bigint = (256-32+7);
+const YELLOWRANGE: bigint = 1;
+const BLACK:       bigint = 0;
+const WHITE:       bigint = (256-47);
 
 // Automap colors
-#define BACKGROUND	BLACK
-#define YOURCOLORS	WHITE
-#define YOURRANGE	0
-#define WALLCOLORS	REDS
-#define WALLRANGE	REDRANGE
-#define TSWALLCOLORS	GRAYS
-#define TSWALLRANGE	GRAYSRANGE
-#define FDWALLCOLORS	BROWNS
-#define FDWALLRANGE	BROWNRANGE
-#define CDWALLCOLORS	YELLOWS
-#define CDWALLRANGE	YELLOWRANGE
-#define THINGCOLORS	GREENS
-#define THINGRANGE	GREENRANGE
-#define SECRETWALLCOLORS WALLCOLORS
-#define SECRETWALLRANGE WALLRANGE
-#define GRIDCOLORS	(GRAYS + GRAYSRANGE/2)
-#define GRIDRANGE	0
-#define XHAIRCOLORS	GRAYS
+const BACKGROUND:       bigint = BLACK;
+const YOURCOLORS:       bigint = WHITE;
+const YOURRANGE:        bigint = 0;
+const WALLCOLORS:       bigint = REDS;
+const WALLRANGE:        bigint = REDRANGE;
+const TSWALLCOLORS:     bigint = GRAYS;
+const TSWALLRANGE:      bigint = GRAYSRANGE;
+const FDWALLCOLORS:     bigint = BROWNS;
+const FDWALLRANGE:      bigint = BROWNRANGE;
+const CDWALLCOLORS:     bigint = YELLOWS;
+const CDWALLRANGE:      bigint = YELLOWRANGE;
+const THINGCOLORS:      bigint = GREENS;
+const THINGRANGE:       bigint = GREENRANGE;
+const SECRETWALLCOLORS: bigint = WALLCOLORS;
+const SECRETWALLRANGE:  bigint = WALLRANGE;
+const GRIDCOLORS:       bigint = (GRAYS + GRAYSRANGE/2);
+const GRIDRANGE:        bigint = 0;
+const XHAIRCOLORS:      bigint = GRAYS;
 
 // drawing stuff
-#define	FB		0
+const FB:bigint	= 0
 
-#define AM_PANDOWNKEY	KEY_DOWNARROW
-#define AM_PANUPKEY	KEY_UPARROW
-#define AM_PANRIGHTKEY	KEY_RIGHTARROW
-#define AM_PANLEFTKEY	KEY_LEFTARROW
-#define AM_ZOOMINKEY	'='
-#define AM_ZOOMOUTKEY	'-'
-#define AM_STARTKEY	KEY_TAB
-#define AM_ENDKEY	KEY_TAB
-#define AM_GOBIGKEY	'0'
-#define AM_FOLLOWKEY	'f'
-#define AM_GRIDKEY	'g'
-#define AM_MARKKEY	'm'
-#define AM_CLEARMARKKEY	'c'
+const AM_PANDOWNKEY	  :bigint = KEY_DOWNARROW;
+const AM_PANUPKEY	  :bigint = KEY_UPARROW;
+const AM_PANRIGHTKEY  :bigint = KEY_RIGHTARROW;
+const AM_PANLEFTKEY	  :bigint = KEY_LEFTARROW;
+const AM_ZOOMINKEY	  :string = '=';
+const AM_ZOOMOUTKEY	  :string = '-';
+const AM_STARTKEY	  :bigint = KEY_TAB;
+const AM_ENDKEY	      :bigint = KEY_TAB;
+const AM_GOBIGKEY	  :string = '0';
+const AM_FOLLOWKEY	  :string = 'f';
+const AM_GRIDKEY	  :string = 'g';
+const AM_MARKKEY	  :string = 'm';
+const AM_CLEARMARKKEY :string = 'c';
 
-#define AM_NUMMARKPOINTS 10
+const AM_NUMMARKPOINTS :bigint = 10;
 
 // scale on entry
-#define INITSCALEMTOF (.2*FRACUNIT)
+const INITSCALEMTOF :bigint = (.2*FRACUNIT);
 // how much the automap moves window per tic in frame-buffer coordinates
 // moves 140 pixels in 1 second
-#define F_PANINC	4
+const F_PANINC :bigint = 4;
 // how much zoom-in per tic
 // goes to 2x in 1 second
-#define M_ZOOMIN        ((int) (1.02*FRACUNIT))
+const M_ZOOMIN :bigint = Math.floor(1.02*FRACUNIT);
 // how much zoom-out per tic
 // pulls out to 0.5x in 1 second
-#define M_ZOOMOUT       ((int) (FRACUNIT/1.02))
+const M_ZOOMOUT :bigint = Math.floor(FRACUNIT/1.02);
 
 // translates between frame-buffer and map distances
-#define FTOM(x) FixedMul(((x)<<16),scale_ftom)
-#define MTOF(x) (FixedMul((x),scale_mtof)>>16)
+function FTOM(x :bigint) :bigint {return(FixedMul(((x)<<16),scale_ftom))}
+function MTOF(x :bigint) :bigint {return(FixedMul((x),scale_mtof)>>16)}
 // translates between frame-buffer and map coordinates
-#define CXMTOF(x)  (f_x + MTOF((x)-m_x))
-#define CYMTOF(y)  (f_y + (f_h - MTOF((y)-m_y)))
+function CXMTOF(x :bigint) :bigint {return(f_x + MTOF((x)-m_x))}
+function CYMTOF(y :bigint) :bigint {return(f_y + (f_h - MTOF((y)-m_y)))}
 
 // the following is crap
-#define LINE_NEVERSEE ML_DONTDRAW
-
-typedef struct
+const LINE_NEVERSEE = ML_DONTDRAW;
+//:::CONTINUE:::
+type struct
 {
     int x, y;
 } fpoint_t;
