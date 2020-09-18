@@ -24,7 +24,7 @@ import "./am_map.h.ts";
 
 // For use if I do walls with outsides/insides
 const REDS:        bigint = (256-5*16);
-const REDRANGE:    bigint =	16;
+const REDRANGE:    bigint = 16;
 const BLUES:       bigint = (256-4*16+8);
 const BLUERANGE:   bigint = 8;
 const GREENS:      bigint = (7*16);
@@ -98,18 +98,19 @@ function CYMTOF(y :bigint) :bigint {return(f_y + (f_h - MTOF((y)-m_y)))}
 
 // the following is crap
 const LINE_NEVERSEE = ML_DONTDRAW;
-//:::CONTINUE:::
-//type fpoint_t = bigint[2]
-xy_type="x"|"y";
-type fpoint_t = Record<xy_type,bigint>;
-{
-    int x, y;
-} fpoint_t;
 
-typedef struct
-{
-    fpoint_t a, b;
-} fline_t;
+//type fpoint_t = bigint[2]
+//xy_type="x"|"y";
+//type fpoint_t = Record<xy_type,bigint>;
+interface fpoint_t{
+    x:bigint;
+    y:bigint;
+}
+
+interface fline_t{
+    a:fpoint_t;
+    b:fpoint_t;
+}
 
 typedef struct
 {
