@@ -1,4 +1,4 @@
-# doomjs
+# doomts
 
 
 This is a project to port the id tech 1 (original doom) engine to typescript.  It was made after we realized how difficult accurate C to JS translation is.
