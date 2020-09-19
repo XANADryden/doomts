@@ -187,78 +187,78 @@ thintriangle_guy:mline_t [] = [
 const NUMTHINTRIANGLEGUYLINES = (sizeof(thintriangle_guy)/sizeof(mline_t));
 
 
-static 	cheating :bigint = 0;
-static 	grid     :bigint = 0;
+export 	cheating :bigint = 0;
+export 	grid     :bigint = 0;
 
-static int 	leveljuststarted = 1; 	// kluge until AM_LevelInit() is called
+export  leveljuststarted :bigint = 1; 	// kluge until AM_LevelInit() is called
 
-boolean    	automapactive = false;
-static int 	finit_width = SCREENWIDTH;
-static int 	finit_height = SCREENHEIGHT - 32;
+var    automapactive :boolean = false;
+export finit_width   :bigint  = SCREENWIDTH;
+export finit_height  :bigint  = SCREENHEIGHT - 32;
 
 // location of window on screen
-static int 	f_x;
-static int	f_y;
+export f_x :bigint;
+export f_y :bigint;
 
 // size of window on screen
-static int 	f_w;
-static int	f_h;
+export f_w :bigint;
+export f_h :bigint;
 
-static int 	lightlev; 		// used for funky strobing effect
-static byte*	fb; 			// pseudo-frame buffer
-static int 	amclock;
+export lightlev :bigint; 		// used for funky strobing effect
+export fb	    :bigint; 		// pseudo-frame buffer    //byte*
+export amclock	:bigint;
 
-static mpoint_t m_paninc; // how far the window pans each tic (map coords)
-static fixed_t 	mtof_zoommul; // how far the window zooms in each tic (map coords)
-static fixed_t 	ftom_zoommul; // how far the window zooms in each tic (fb coords)
+export m_paninc     :mpoint_t; // how far the window pans each tic (map coords)
+export mtof_zoommul :fixed_t;  // how far the window zooms in each tic (map coords)
+export ftom_zoommul :fixed_t;  // how far the window zooms in each tic (fb coords)
 
-static fixed_t 	m_x, m_y;   // LL x,y where the window is on the map (map coords)
-static fixed_t 	m_x2, m_y2; // UR x,y where the window is on the map (map coords)
+export m_x:fixed_t, m_y:fixed_t;   // LL x,y where the window is on the map (map coords)
+export m_x2:fixed_t, m_y2:fixed_t; // UR x,y where the window is on the map (map coords)
 
 //
 // width/height of window on map (map coords)
 //
-static fixed_t 	m_w;
-static fixed_t	m_h;
+export m_w :fixed_t;
+export m_h :fixed_t;
 
 // based on level size
-static fixed_t 	min_x;
-static fixed_t	min_y; 
-static fixed_t 	max_x;
-static fixed_t  max_y;
+export fixed_t 	min_x;
+export fixed_t	min_y; 
+export fixed_t 	max_x;
+export fixed_t  max_y;
 
-static fixed_t 	max_w; // max_x-min_x,
-static fixed_t  max_h; // max_y-min_y
+export fixed_t  max_w; // max_x-min_x
+export fixed_t  max_h; // max_y-min_y
 
 // based on player size
-static fixed_t 	min_w;
-static fixed_t  min_h;
+export fixed_t 	min_w;
+export fixed_t  min_h;
 
 
-static fixed_t 	min_scale_mtof; // used to tell when to stop zooming out
-static fixed_t 	max_scale_mtof; // used to tell when to stop zooming in
+export fixed_t 	min_scale_mtof; // used to tell when to stop zooming out
+export fixed_t 	max_scale_mtof; // used to tell when to stop zooming in
 
 // old stuff for recovery later
-static fixed_t old_m_w, old_m_h;
-static fixed_t old_m_x, old_m_y;
+export fixed_t old_m_w, old_m_h;
+export fixed_t old_m_x, old_m_y;
 
 // old location used by the Follower routine
-static mpoint_t f_oldloc;
+export mpoint_t f_oldloc;
 
 // used by MTOF to scale from map-to-frame-buffer coords
-static fixed_t scale_mtof = INITSCALEMTOF;
+export fixed_t scale_mtof = INITSCALEMTOF;
 // used by FTOM to scale from frame-buffer-to-map coords (=1/scale_mtof)
-static fixed_t scale_ftom;
+export fixed_t scale_ftom;
 
-static player_t *plr; // the player represented by an arrow
+export player_t plr; // the player represented by an arrow
 
-static patch_t *marknums[10]; // numbers used for marking by the automap
-static mpoint_t markpoints[AM_NUMMARKPOINTS]; // where the points are
-static int markpointnum = 0; // next point to be assigned
+export patch_t marknums[10]; // numbers used for marking by the automap
+export mpoint_t markpoints[AM_NUMMARKPOINTS]; // where the points are
+export markpointnum :bigint = 0; // next point to be assigned
 
-static int followplayer = 1; // specifies whether to follow the player around
+export followplayer :bigint = 1; // specifies whether to follow the player around
 
-static unsigned char cheat_amap_seq[] = { 0xb2, 0x26, 0x26, 0x2e, 0xff };
+export unsigned char cheat_amap_seq[] = { 0xb2, 0x26, 0x26, 0x2e, 0xff };
 static cheatseq_t cheat_amap = { cheat_amap_seq, 0 };
 
 static boolean stopped = true;
