@@ -112,20 +112,20 @@ interface fline_t{
     b:fpoint_t;
 }
 
-typedef struct
-{
-    fixed_t		x,y;
-} mpoint_t;
+interface mpoint_t{
+    x:fixed_t;
+    y:fixed_t;
+}
 
-typedef struct
-{
-    mpoint_t a, b;
-} mline_t;
+interface mline_t{
+    a:mpoint_t;
+    b:mpoint_t;
+}
 
-typedef struct
-{
-    fixed_t slp, islp;
-} islope_t;
+interface islope_t{
+    slp:fixed_t;
+    islp:fixed_t;
+}
 
 
 
@@ -134,21 +134,22 @@ typedef struct
 //  A line drawing of the player pointing right,
 //   starting from the middle.
 //
-#define R ((8*PLAYERRADIUS)/7)
-mline_t player_arrow[] = {
-    { { -R+R/8, 0 }, { R, 0 } }, // -----
-    { { R, 0 }, { R-R/2, R/4 } },  // ----->
-    { { R, 0 }, { R-R/2, -R/4 } },
-    { { -R+R/8, 0 }, { -R-R/8, R/4 } }, // >---->
-    { { -R+R/8, 0 }, { -R-R/8, -R/4 } },
-    { { -R+3*R/8, 0 }, { -R+R/8, R/4 } }, // >>--->
-    { { -R+3*R/8, 0 }, { -R+R/8, -R/4 } }
-};
-#undef R
-#define NUMPLYRLINES (sizeof(player_arrow)/sizeof(mline_t))
+let R :number = ((8*PLAYERRADIUS)/7);
+var player_arrow:mline_t[] = [
+    {a:{ x:-R+R/8, y:0 }, b:{ x:R, y:0 } }, // -----
+    {a:{ x:R, y:0 }, b:{ x:R-R/2, y:R/4 } },  // ----->
+    {a:{ x:R, 0 }, b:{ x:R-R/2, y:-R/4 } },
+    {a:{ x:-R+R/8, 0 }, b:{ x:-R-R/8, y:R/4 } }, // >---->
+    {a:{ x:-R+R/8, 0 }, b:{ x:-R-R/8, y:-R/4 } },
+    {a:{ x:-R+3*R/8, 0 }, b:{ x:-R+R/8, y:R/4 } }, // >>--->
+    {a:{ x:-R+3*R/8, 0 }, b:{ x:R+R/8, y:-R/4 } }
+];
+//#undef R
+const NUMPLYRLINES = (sizeof(player_arrow)/sizeof(mline_t));
 
-#define R ((8*PLAYERRADIUS)/7)
-mline_t cheat_player_arrow[] = {
+//:::CONTINUE:::
+//#define R ((8*PLAYERRADIUS)/7)
+var cheat_player_arrow:mline_t[] = [
     { { -R+R/8, 0 }, { R, 0 } }, // -----
     { { R, 0 }, { R-R/2, R/6 } },  // ----->
     { { R, 0 }, { R-R/2, -R/6 } },
@@ -165,33 +166,29 @@ mline_t cheat_player_arrow[] = {
     { { R/6, R/4 }, { R/6, -R/7 } }, // >>-ddt->
     { { R/6, -R/7 }, { R/6+R/32, -R/7-R/32 } },
     { { R/6+R/32, -R/7-R/32 }, { R/6+R/10, -R/7 } }
-};
-#undef R
-#define NUMCHEATPLYRLINES (sizeof(cheat_player_arrow)/sizeof(mline_t))
+];
+//#undef R
+const NUMCHEATPLYRLINES = (sizeof(cheat_player_arrow)/sizeof(mline_t));
 
-#define R (FRACUNIT)
-mline_t triangle_guy[] = {
+R = (FRACUNIT);
+triangle_guy:mline_t [] = [
     { { -.867*R, -.5*R }, { .867*R, -.5*R } },
     { { .867*R, -.5*R } , { 0, R } },
     { { 0, R }, { -.867*R, -.5*R } }
-};
-#undef R
-#define NUMTRIANGLEGUYLINES (sizeof(triangle_guy)/sizeof(mline_t))
+];
+const NUMTRIANGLEGUYLINES = (sizeof(triangle_guy)/sizeof(mline_t));
 
-#define R (FRACUNIT)
-mline_t thintriangle_guy[] = {
+//#define R (FRACUNIT)
+thintriangle_guy:mline_t [] = [
     { { -.5*R, -.7*R }, { R, 0 } },
     { { R, 0 }, { -.5*R, .7*R } },
     { { -.5*R, .7*R }, { -.5*R, -.7*R } }
-};
-#undef R
-#define NUMTHINTRIANGLEGUYLINES (sizeof(thintriangle_guy)/sizeof(mline_t))
+];
+const NUMTHINTRIANGLEGUYLINES = (sizeof(thintriangle_guy)/sizeof(mline_t));
 
 
-
-
-static int 	cheating = 0;
-static int 	grid = 0;
+static 	cheating :bigint = 0;
+static 	grid     :bigint = 0;
 
 static int 	leveljuststarted = 1; 	// kluge until AM_LevelInit() is called
 
