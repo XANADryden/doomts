@@ -150,47 +150,47 @@ const NUMPLYRLINES = (sizeof(player_arrow)/sizeof(mline_t));
 //:::CONTINUE:::
 //#define R ((8*PLAYERRADIUS)/7)
 var cheat_player_arrow:mline_t[] = [
-    { { -R+R/8, 0 }, { R, 0 } }, // -----
-    { { R, 0 }, { R-R/2, R/6 } },  // ----->
-    { { R, 0 }, { R-R/2, -R/6 } },
-    { { -R+R/8, 0 }, { -R-R/8, R/6 } }, // >----->
-    { { -R+R/8, 0 }, { -R-R/8, -R/6 } },
-    { { -R+3*R/8, 0 }, { -R+R/8, R/6 } }, // >>----->
-    { { -R+3*R/8, 0 }, { -R+R/8, -R/6 } },
-    { { -R/2, 0 }, { -R/2, -R/6 } }, // >>-d--->
-    { { -R/2, -R/6 }, { -R/2+R/6, -R/6 } },
-    { { -R/2+R/6, -R/6 }, { -R/2+R/6, R/4 } },
-    { { -R/6, 0 }, { -R/6, -R/6 } }, // >>-dd-->
-    { { -R/6, -R/6 }, { 0, -R/6 } },
-    { { 0, -R/6 }, { 0, R/4 } },
-    { { R/6, R/4 }, { R/6, -R/7 } }, // >>-ddt->
-    { { R/6, -R/7 }, { R/6+R/32, -R/7-R/32 } },
-    { { R/6+R/32, -R/7-R/32 }, { R/6+R/10, -R/7 } }
+    {a:{ x:-R+R/8, y:0 }, b:{ x:R, y:0 } }, // -----
+    {a:{ x:R, y:0 }, b:{ x:R-R/2, y:R/6 } },  // ----->
+    {a:{ x:R, y:0 }, b:{ x:R-R/2, y:-R/6 } },
+    {a:{ x:-R+R/8, y:0 }, b:{ x:-R-R/8, y:R/6 } }, // >----->
+    {a:{ x:-R+R/8, y:0 }, b:{ x:-R-R/8, y:-R/6 } },
+    {a:{ x:-R+3*R/8, y:0 }, b:{ x:-R+R/8, y:R/6 } }, // >>----->
+    {a:{ x:-R+3*R/8, y:0 }, b:{ x:-R+R/8, y:-R/6 } },
+    {a:{ x:-R/2, y:0 }, b:{ x:-R/2, y:-R/6 } }, // >>-d--->
+    {a:{ x:-R/2, y:-R/6 }, b:{ x:-R/2+R/6, y:-R/6 } },
+    {a:{ x:-R/2+R/6, y:-R/6 }, b:{ x:-R/2+R/6, y:R/4 } },
+    {a:{ x:-R/6, y:0 }, b:{ x:-R/6, y:-R/6 } }, // >>-dd-->
+    {a:{ x:-R/6, y:-R/6 }, b:{ x:0, y:-R/6 } },
+    {a:{ x:0, y:-R/6 }, b:{ x:0, y:R/4 } },
+    {a:{ x:R/6, y:R/4 }, b:{ x:R/6, y:-R/7 } }, // >>-ddt->
+    {a:{ x:R/6, y:-R/7 }, b:{ x:R/6+R/32, y:-R/7-R/32 } },
+    {a:{ x:R/6+R/32, y:-R/7-R/32 }, b:{ x:R/6+R/10, y:-R/7 } }
 ];
 //#undef R
 const NUMCHEATPLYRLINES = (sizeof(cheat_player_arrow)/sizeof(mline_t));
 
 R = (FRACUNIT);
-triangle_guy:mline_t [] = [
-    { { -.867*R, -.5*R }, { .867*R, -.5*R } },
-    { { .867*R, -.5*R } , { 0, R } },
-    { { 0, R }, { -.867*R, -.5*R } }
+var triangle_guy:mline_t [] = [
+    {a:{ x:-.867*R, y:-.5*R }, b:{ x:.867*R, y:-.5*R } },
+    {a:{ x:.867*R, y:-.5*R } , b:{ x:0, y:R } },
+    {a:{ x:0, y:R }, b:{ x:-.867*R, y:-.5*R } }
 ];
 const NUMTRIANGLEGUYLINES = (sizeof(triangle_guy)/sizeof(mline_t));
 
 //#define R (FRACUNIT)
-thintriangle_guy:mline_t [] = [
-    { { -.5*R, -.7*R }, { R, 0 } },
-    { { R, 0 }, { -.5*R, .7*R } },
-    { { -.5*R, .7*R }, { -.5*R, -.7*R } }
+var thintriangle_guy:mline_t [] = [
+    {a:{ x:-.5*R, y:-.7*R }, b:{ x:R, y:0 } },
+    {a:{ x:R, y:0 }, b:{ x:-.5*R, y:.7*R } },
+    {a:{ x:-.5*R, y:.7*R }, b:{ x:-.5*R, y:-.7*R } }
 ];
 const NUMTHINTRIANGLEGUYLINES = (sizeof(thintriangle_guy)/sizeof(mline_t));
 
 
-export 	cheating :bigint = 0;
-export 	grid     :bigint = 0;
+export 	cheating :bigint = 0n;
+export 	grid     :bigint = 0n;
 
-export  leveljuststarted :bigint = 1; 	// kluge until AM_LevelInit() is called
+export  leveljuststarted :bigint = 1n; 	// kluge until AM_LevelInit() is called
 
 var    automapactive :boolean = false;
 export finit_width   :bigint  = SCREENWIDTH;
@@ -205,14 +205,14 @@ export f_w :bigint;
 export f_h :bigint;
 
 export lightlev :bigint; 		// used for funky strobing effect
-export fb	    :bigint; 		// pseudo-frame buffer    //byte*
+export fb       :bigint; 		// pseudo-frame buffer    //byte*
 export amclock	:bigint;
 
 export m_paninc     :mpoint_t; // how far the window pans each tic (map coords)
 export mtof_zoommul :fixed_t;  // how far the window zooms in each tic (map coords)
 export ftom_zoommul :fixed_t;  // how far the window zooms in each tic (fb coords)
 
-export m_x:fixed_t, m_y:fixed_t;   // LL x,y where the window is on the map (map coords)
+export m_x:fixed_t,  m_y:fixed_t;   // LL x,y where the window is on the map (map coords)
 export m_x2:fixed_t, m_y2:fixed_t; // UR x,y where the window is on the map (map coords)
 
 //
@@ -222,10 +222,10 @@ export m_w :fixed_t;
 export m_h :fixed_t;
 
 // based on level size
-export fixed_t 	min_x;
-export fixed_t	min_y; 
-export fixed_t 	max_x;
-export fixed_t  max_y;
+export min_x  :fixed_t;
+export min_y  :fixed_t; 
+export max_x  :fixed_t;
+export max_y  :fixed_t;
 
 export fixed_t  max_w; // max_x-min_x
 export fixed_t  max_h; // max_y-min_y
