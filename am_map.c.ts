@@ -1,25 +1,25 @@
 //#include <stdio.h>
 
-import "./z_zone.h.ts";
-import "./doomdef.h.ts";
-import "./st_stuff.h.ts";
-import "./p_local.h.ts";
-import "./w_wad.h.ts";
+import "z_zone.h.ts";
+import "doomdef.h.ts";
+import "st_stuff.h.ts";
+import "p_local.h.ts";
+import "w_wad.h.ts";
 
-import "./m_cheat.h.ts";
-import "./i_system.h.ts";
+import "m_cheat.h.ts";
+import "i_system.h.ts";
 
 // Needs access to LFB.
-import "./v_video.h.ts";
+import "v_video.h.ts";
 
 // State.
-import "./doomstat.h.ts";
-import "./r_state.h.ts";
+import "doomstat.h.ts";
+import "r_state.h.ts";
 
 // Data.
-import "./dstrings.h.ts";
+import "dstrings.h.ts";
 
-import "./am_map.h.ts";
+import "am_map.h.ts";
 
 
 // For use if I do walls with outsides/insides
