@@ -22,21 +22,21 @@
 //-----------------------------------------------------------------------------
 
 
-#ifndef __D_MAIN__
-#define __D_MAIN__
+if (typeof __D_MAIN__ == "undefined"){
+export const __D_MAIN__ :boolean = true;
 
-#include "d_event.h"
+import "d_event.h"
 
-#ifdef __GNUG__
+/*#ifdef __GNUG__
 #pragma interface
-#endif
+#endif*/
 
 
 
-#define MAXWADFILES             20
-extern char*		wadfiles[MAXWADFILES];
+export const MAXWADFILES :bigint = 20;
+globalThis.wadfiles :number[]; //char*[MAXWADFILES]
 
-void D_AddFile (char *file);
+function D_AddFile (file :char) :void;
 
 
 
