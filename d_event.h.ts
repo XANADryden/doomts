@@ -20,11 +20,11 @@
 //-----------------------------------------------------------------------------
 
 
-#ifndef __D_EVENT__
-#define __D_EVENT__
+if (typeof __D_EVENT__ == undefined){
+export const __D_EVENT__ :boolean = true;
 
 
-#include "doomtype.h"
+import "doomtype.h.ts";
 
 
 //
@@ -32,27 +32,27 @@
 //
 
 // Input event types.
-typedef enum
+export enum evtype_t
 {
-    ev_keydown,
+    ev_keydown = 0,
     ev_keyup,
     ev_mouse,
     ev_joystick
-} evtype_t;
+}
 
 // Event structure.
-typedef struct
+export interface event_t
 {
-    evtype_t	type;
-    int		data1;		// keys / mouse/joystick buttons
-    int		data2;		// mouse/joystick x move
-    int		data3;		// mouse/joystick y move
-} event_t;
+    type    :evtype_t;
+    data1   :bigint;		// keys / mouse/joystick buttons
+    data2   :bigint;		// mouse/joystick x move
+    data3   :bigint;		// mouse/joystick y move
+}
 
  
-typedef enum
+export enum gameaction_t
 {
-    ga_nothing,
+    ga_nothing = 0,
     ga_loadlevel,
     ga_newgame,
     ga_loadgame,
@@ -62,42 +62,42 @@ typedef enum
     ga_victory,
     ga_worlddone,
     ga_screenshot
-} gameaction_t;
+}
 
 
 
 //
 // Button/action code definitions.
 //
-typedef enum
+export enum buttoncode_t
 {
     // Press "Fire".
-    BT_ATTACK		= 1,
+    BT_ATTACK :bigint = 1n,
     // Use button, to open doors, activate switches.
-    BT_USE		= 2,
+    BT_USE    :bigint = 2n,
 
     // Flag: game events, not really buttons.
-    BT_SPECIAL		= 128,
-    BT_SPECIALMASK	= 3,
+    BT_SPECIAL     :bigint = 128n,
+    BT_SPECIALMASK :bigint = 3n,
     
     // Flag, weapon change pending.
     // If true, the next 3 bits hold weapon num.
-    BT_CHANGE		= 4,
+    BT_CHANGE :bigint = 4n,
     // The 3bit weapon mask and shift, convenience.
-    BT_WEAPONMASK	= (8+16+32),
-    BT_WEAPONSHIFT	= 3,
+    BT_WEAPONMASK  :bigint = (8n+16n+32n),
+    BT_WEAPONSHIFT :bigint = 3n,
 
     // Pause the game.
-    BTS_PAUSE		= 1,
+    BTS_PAUSE :bigint = 1n,
     // Save the game at each console.
-    BTS_SAVEGAME	= 2,
+    BTS_SAVEGAME :bigint = 2n,
 
     // Savegame slot numbers
     //  occupy the second byte of buttons.    
-    BTS_SAVEMASK	= (4+8+16),
-    BTS_SAVESHIFT 	= 2,
+    BTS_SAVEMASK  :bigint = (4n+8n+16n),
+    BTS_SAVESHIFT :bigint = 2n,
   
-} buttoncode_t;
+}
 
 
 
@@ -105,16 +105,16 @@ typedef enum
 //
 // GLOBAL VARIABLES
 //
-#define MAXEVENTS		64
+export const MAXEVENTS  :bigint = 64n;
 
-extern  event_t		events[MAXEVENTS];
-extern  int             eventhead;
-extern	int		eventtail;
+globalThis. events      :event_t[];        //needs length of MAXEVENTS
+globalThis. eventhead   :bigint;
+globalThis.	eventtail   :bigint;
 
-extern  gameaction_t    gameaction;
+globalThis. gameaction  :gameaction_t;
 
 
-#endif
+}
 //-----------------------------------------------------------------------------
 //
 // $Log:$
