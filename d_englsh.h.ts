@@ -20,186 +20,186 @@
 //
 //-----------------------------------------------------------------------------
 
-#ifndef __D_ENGLSH__
-#define __D_ENGLSH__
+if (typeof __D_ENGLSH__ == "undefined"){
+  export const __D_ENGLSH__ :boolean = true;
+  
+  //
+  //	Printed strings for translation
+  //
 
-//
-//	Printed strings for translation
-//
+  //
+  // D_Main.C
+  //
+  export const D_DEVSTR	:string = "Development mode ON.\n";
+  export const D_CDROM	:string = "CD-ROM Version: default.cfg from c:\\doomdata\n";
+  
+  //
+  //	M_Menu.C
+  //
+export const PRESSKEY   :string =	"press a key.";
+export const PRESSYN 	  :string =	"press y or n.";
+export const QUITMSG	  :string =	"are you sure you want to\nquit this great game?";
+export const LOADNET 	  :string =	"you can't do load while in a net game!\n\n"   + PRESSKEY;
+export const QLOADNET	  :string =	"you can't quickload during a netgame!\n\n"    + PRESSKEY;
+export const QSAVESPOT	:string =	"you haven't picked a quicksave slot yet!\n\n" + PRESSKEY;
+export const SAVEDEAD 	:string =	"you can't save if you aren't playing!\n\n"    + PRESSKEY;
+export const QSPROMPT 	:string =	"quicksave over your game named\n\n'%s'?\n\n"  + PRESSYN;
+export const QLPROMPT	  :string =	"do you want to quickload the game named\n\n'%s'?\n\n" + PRESSYN;
 
-//
-// D_Main.C
-//
-#define D_DEVSTR	"Development mode ON.\n"
-#define D_CDROM	"CD-ROM Version: default.cfg from c:\\doomdata\n"
+export const NEWGAME   :string =
+"you can't start a new game\n" +
+"while in a network game.\n\n" + PRESSKEY;
 
-//
-//	M_Menu.C
-//
-#define PRESSKEY 	"press a key."
-#define PRESSYN 	"press y or n."
-#define QUITMSG	"are you sure you want to\nquit this great game?"
-#define LOADNET 	"you can't do load while in a net game!\n\n"PRESSKEY
-#define QLOADNET	"you can't quickload during a netgame!\n\n"PRESSKEY
-#define QSAVESPOT	"you haven't picked a quicksave slot yet!\n\n"PRESSKEY
-#define SAVEDEAD 	"you can't save if you aren't playing!\n\n"PRESSKEY
-#define QSPROMPT 	"quicksave over your game named\n\n'%s'?\n\n"PRESSYN
-#define QLPROMPT	"do you want to quickload the game named\n\n'%s'?\n\n"PRESSYN
+export const NIGHTMARE :string =
+"are you sure? this skill level\n" + 
+"isn't even remotely fair.\n\n" + PRESSYN;
 
-#define NEWGAME	\
-"you can't start a new game\n"\
-"while in a network game.\n\n"PRESSKEY
+export const SWSTRING  :string =
+"this is the shareware version of doom.\n\n" + 
+"you need to order the entire trilogy.\n\n" + PRESSKEY;
 
-#define NIGHTMARE	\
-"are you sure? this skill level\n"\
-"isn't even remotely fair.\n\n"PRESSYN
+export const MSGOFF	  :string = "Messages OFF";
+export const MSGON	  :string = "Messages ON";
+export const NETEND	  :string = "you can't end a netgame!\n\n" + PRESSKEY;
+export const ENDGAME	:string = "are you sure you want to end the game?\n\n" + PRESSYN;
 
-#define SWSTRING	\
-"this is the shareware version of doom.\n\n"\
-"you need to order the entire trilogy.\n\n"PRESSKEY
+export const DOSY		  :string = "(press y to quit)";
 
-#define MSGOFF	"Messages OFF"
-#define MSGON		"Messages ON"
-#define NETEND	"you can't end a netgame!\n\n"PRESSKEY
-#define ENDGAME	"are you sure you want to end the game?\n\n"PRESSYN
-
-#define DOSY		"(press y to quit)"
-
-#define DETAILHI	"High detail"
-#define DETAILLO	"Low detail"
-#define GAMMALVL0	"Gamma correction OFF"
-#define GAMMALVL1	"Gamma correction level 1"
-#define GAMMALVL2	"Gamma correction level 2"
-#define GAMMALVL3	"Gamma correction level 3"
-#define GAMMALVL4	"Gamma correction level 4"
-#define EMPTYSTRING	"empty slot"
+export const DETAILHI	    :string = "High detail";
+export const DETAILLO	    :string = "Low detail";
+export const GAMMALVL0	  :string = "Gamma correction OFF";
+export const GAMMALVL1	  :string = "Gamma correction level 1";
+export const GAMMALVL2	  :string = "Gamma correction level 2";
+export const GAMMALVL3	  :string = "Gamma correction level 3";
+export const GAMMALVL4	  :string = "Gamma correction level 4";
+export const EMPTYSTRING	:string = "empty slot";
 
 //
 //	P_inter.C
 //
-#define GOTARMOR	"Picked up the armor."
-#define GOTMEGA	"Picked up the MegaArmor!"
-#define GOTHTHBONUS	"Picked up a health bonus."
-#define GOTARMBONUS	"Picked up an armor bonus."
-#define GOTSTIM	"Picked up a stimpack."
-#define GOTMEDINEED	"Picked up a medikit that you REALLY need!"
-#define GOTMEDIKIT	"Picked up a medikit."
-#define GOTSUPER	"Supercharge!"
+export const GOTARMOR	    :string = "Picked up the armor.";
+export const GOTMEGA	    :string = "Picked up the MegaArmor!";
+export const GOTHTHBONUS	:string = "Picked up a health bonus.";
+export const GOTARMBONUS	:string = "Picked up an armor bonus.";
+export const GOTSTIM	    :string = "Picked up a stimpack.";
+export const GOTMEDINEED	:string = "Picked up a medikit that you REALLY need!";
+export const GOTMEDIKIT	  :string = "Picked up a medikit.";
+export const GOTSUPER	    :string = "Supercharge!";
 
-#define GOTBLUECARD	"Picked up a blue keycard."
-#define GOTYELWCARD	"Picked up a yellow keycard."
-#define GOTREDCARD	"Picked up a red keycard."
-#define GOTBLUESKUL	"Picked up a blue skull key."
-#define GOTYELWSKUL	"Picked up a yellow skull key."
-#define GOTREDSKULL	"Picked up a red skull key."
+export const GOTBLUECARD	:string = "Picked up a blue keycard.";
+export const GOTYELWCARD	:string = "Picked up a yellow keycard.";
+export const GOTREDCARD	  :string = "Picked up a red keycard.";
+export const GOTBLUESKUL	:string = "Picked up a blue skull key.";
+export const GOTYELWSKUL	:string = "Picked up a yellow skull key.";
+export const GOTREDSKULL	:string = "Picked up a red skull key.";
 
-#define GOTINVUL	"Invulnerability!"
-#define GOTBERSERK	"Berserk!"
-#define GOTINVIS	"Partial Invisibility"
-#define GOTSUIT	"Radiation Shielding Suit"
-#define GOTMAP	"Computer Area Map"
-#define GOTVISOR	"Light Amplification Visor"
-#define GOTMSPHERE	"MegaSphere!"
+export const GOTINVUL	    :string = "Invulnerability!";
+export const GOTBERSERK	  :string = "Berserk!";
+export const GOTINVIS	    :string = "Partial Invisibility";
+export const GOTSUIT	    :string = "Radiation Shielding Suit";
+export const GOTMAP	      :string = "Computer Area Map";
+export const GOTVISOR	    :string = "Light Amplification Visor";
+export const GOTMSPHERE	  :string = "MegaSphere!";
 
-#define GOTCLIP	"Picked up a clip."
-#define GOTCLIPBOX	"Picked up a box of bullets."
-#define GOTROCKET	"Picked up a rocket."
-#define GOTROCKBOX	"Picked up a box of rockets."
-#define GOTCELL	"Picked up an energy cell."
-#define GOTCELLBOX	"Picked up an energy cell pack."
-#define GOTSHELLS	"Picked up 4 shotgun shells."
-#define GOTSHELLBOX	"Picked up a box of shotgun shells."
-#define GOTBACKPACK	"Picked up a backpack full of ammo!"
+export const GOTCLIP	    :string = "Picked up a clip.";
+export const GOTCLIPBOX	  :string = "Picked up a box of bullets.";
+export const GOTROCKET	  :string = "Picked up a rocket.";
+export const GOTROCKBOX	  :string = "Picked up a box of rockets.";
+export const GOTCELL	    :string = "Picked up an energy cell.";
+export const GOTCELLBOX	  :string = "Picked up an energy cell pack.";
+export const GOTSHELLS	  :string = "Picked up 4 shotgun shells.";
+export const GOTSHELLBOX	:string = "Picked up a box of shotgun shells.";
+export const GOTBACKPACK	:string = "Picked up a backpack full of ammo!";
 
-#define GOTBFG9000	"You got the BFG9000!  Oh, yes."
-#define GOTCHAINGUN	"You got the chaingun!"
-#define GOTCHAINSAW	"A chainsaw!  Find some meat!"
-#define GOTLAUNCHER	"You got the rocket launcher!"
-#define GOTPLASMA	"You got the plasma gun!"
-#define GOTSHOTGUN	"You got the shotgun!"
-#define GOTSHOTGUN2	"You got the super shotgun!"
+export const GOTBFG9000	  :string = "You got the BFG9000!  Oh, yes.";
+export const GOTCHAINGUN	:string = "You got the chaingun!";
+export const GOTCHAINSAW	:string = "A chainsaw!  Find some meat!";
+export const GOTLAUNCHER	:string = "You got the rocket launcher!";
+export const GOTPLASMA	  :string = "You got the plasma gun!";
+export const GOTSHOTGUN	  :string = "You got the shotgun!";
+export const GOTSHOTGUN2	:string = "You got the super shotgun!";
 
 //
 // P_Doors.C
 //
-#define PD_BLUEO	"You need a blue key to activate this object"
-#define PD_REDO	"You need a red key to activate this object"
-#define PD_YELLOWO	"You need a yellow key to activate this object"
-#define PD_BLUEK	"You need a blue key to open this door"
-#define PD_REDK	"You need a red key to open this door"
-#define PD_YELLOWK	"You need a yellow key to open this door"
+export const PD_BLUEO	    :string = "You need a blue key to activate this object";
+export const PD_REDO	    :string = "You need a red key to activate this object";
+export const PD_YELLOWO	  :string = "You need a yellow key to activate this object";
+export const PD_BLUEK	    :string = "You need a blue key to open this door";
+export const PD_REDK	    :string = "You need a red key to open this door";
+export const PD_YELLOWK	  :string = "You need a yellow key to open this door";
 
 //
 //	G_game.C
 //
-#define GGSAVED	"game saved."
+export const GGSAVED	:string = "game saved.";
 
 //
 //	HU_stuff.C
 //
-#define HUSTR_MSGU	"[Message unsent]"
+export const HUSTR_MSGU	"[Message unsent]"
 
-#define HUSTR_E1M1	"E1M1: Hangar"
-#define HUSTR_E1M2	"E1M2: Nuclear Plant"
-#define HUSTR_E1M3	"E1M3: Toxin Refinery"
-#define HUSTR_E1M4	"E1M4: Command Control"
-#define HUSTR_E1M5	"E1M5: Phobos Lab"
-#define HUSTR_E1M6	"E1M6: Central Processing"
-#define HUSTR_E1M7	"E1M7: Computer Station"
-#define HUSTR_E1M8	"E1M8: Phobos Anomaly"
-#define HUSTR_E1M9	"E1M9: Military Base"
+export const HUSTR_E1M1	:string = "E1M1: Hangar";
+export const HUSTR_E1M2	:string = "E1M2: Nuclear Plant";
+export const HUSTR_E1M3	:string = "E1M3: Toxin Refinery";
+export const HUSTR_E1M4	:string = "E1M4: Command Control";
+export const HUSTR_E1M5	:string = "E1M5: Phobos Lab";
+export const HUSTR_E1M6	:string = "E1M6: Central Processing";
+export const HUSTR_E1M7	:string = "E1M7: Computer Station";
+export const HUSTR_E1M8	:string = "E1M8: Phobos Anomaly";
+export const HUSTR_E1M9	:string = "E1M9: Military Base";
 
-#define HUSTR_E2M1	"E2M1: Deimos Anomaly"
-#define HUSTR_E2M2	"E2M2: Containment Area"
-#define HUSTR_E2M3	"E2M3: Refinery"
-#define HUSTR_E2M4	"E2M4: Deimos Lab"
-#define HUSTR_E2M5	"E2M5: Command Center"
-#define HUSTR_E2M6	"E2M6: Halls of the Damned"
-#define HUSTR_E2M7	"E2M7: Spawning Vats"
-#define HUSTR_E2M8	"E2M8: Tower of Babel"
-#define HUSTR_E2M9	"E2M9: Fortress of Mystery"
+export const HUSTR_E2M1	:string = "E2M1: Deimos Anomaly";
+export const HUSTR_E2M2	:string = "E2M2: Containment Area";
+export const HUSTR_E2M3	:string = "E2M3: Refinery";
+export const HUSTR_E2M4	:string = "E2M4: Deimos Lab";
+export const HUSTR_E2M5	:string = "E2M5: Command Center";
+export const HUSTR_E2M6	:string = "E2M6: Halls of the Damned";
+export const HUSTR_E2M7	:string = "E2M7: Spawning Vats";
+export const HUSTR_E2M8	:string = "E2M8: Tower of Babel";
+export const HUSTR_E2M9	:string = "E2M9: Fortress of Mystery";
 
-#define HUSTR_E3M1	"E3M1: Hell Keep"
-#define HUSTR_E3M2	"E3M2: Slough of Despair"
-#define HUSTR_E3M3	"E3M3: Pandemonium"
-#define HUSTR_E3M4	"E3M4: House of Pain"
-#define HUSTR_E3M5	"E3M5: Unholy Cathedral"
-#define HUSTR_E3M6	"E3M6: Mt. Erebus"
-#define HUSTR_E3M7	"E3M7: Limbo"
-#define HUSTR_E3M8	"E3M8: Dis"
-#define HUSTR_E3M9	"E3M9: Warrens"
+export const HUSTR_E3M1	:string = "E3M1: Hell Keep";
+export const HUSTR_E3M2	:string = "E3M2: Slough of Despair";
+export const HUSTR_E3M3	:string = "E3M3: Pandemonium";
+export const HUSTR_E3M4	:string = "E3M4: House of Pain";
+export const HUSTR_E3M5	:string = "E3M5: Unholy Cathedral";
+export const HUSTR_E3M6	:string = "E3M6: Mt. Erebus";
+export const HUSTR_E3M7	:string = "E3M7: Limbo";
+export const HUSTR_E3M8	:string = "E3M8: Dis";
+export const HUSTR_E3M9	:string = "E3M9: Warrens";
 
-#define HUSTR_E4M1	"E4M1: Hell Beneath"
-#define HUSTR_E4M2	"E4M2: Perfect Hatred"
-#define HUSTR_E4M3	"E4M3: Sever The Wicked"
-#define HUSTR_E4M4	"E4M4: Unruly Evil"
-#define HUSTR_E4M5	"E4M5: They Will Repent"
-#define HUSTR_E4M6	"E4M6: Against Thee Wickedly"
-#define HUSTR_E4M7	"E4M7: And Hell Followed"
-#define HUSTR_E4M8	"E4M8: Unto The Cruel"
-#define HUSTR_E4M9	"E4M9: Fear"
+export const HUSTR_E4M1	:string = "E4M1: Hell Beneath";
+export const HUSTR_E4M2	:string = "E4M2: Perfect Hatred";
+export const HUSTR_E4M3	:string = "E4M3: Sever The Wicked";
+export const HUSTR_E4M4	:string = "E4M4: Unruly Evil";
+export const HUSTR_E4M5	:string = "E4M5: They Will Repent";
+export const HUSTR_E4M6	:string = "E4M6: Against Thee Wickedly";
+export const HUSTR_E4M7	:string = "E4M7: And Hell Followed";
+export const HUSTR_E4M8	:string = "E4M8: Unto The Cruel";
+export const HUSTR_E4M9	:string = "E4M9: Fear";
 
-#define HUSTR_1	"level 1: entryway"
-#define HUSTR_2	"level 2: underhalls"
-#define HUSTR_3	"level 3: the gantlet"
-#define HUSTR_4	"level 4: the focus"
-#define HUSTR_5	"level 5: the waste tunnels"
-#define HUSTR_6	"level 6: the crusher"
-#define HUSTR_7	"level 7: dead simple"
-#define HUSTR_8	"level 8: tricks and traps"
-#define HUSTR_9	"level 9: the pit"
-#define HUSTR_10	"level 10: refueling base"
-#define HUSTR_11	"level 11: 'o' of destruction!"
+export const HUSTR_1	  :string = "level 1: entryway"
+export const HUSTR_2	  :string = "level 2: underhalls"
+export const HUSTR_3	  :string = "level 3: the gantlet"
+export const HUSTR_4	  :string = "level 4: the focus"
+export const HUSTR_5	  :string = "level 5: the waste tunnels"
+export const HUSTR_6	  :string = "level 6: the crusher"
+export const HUSTR_7	  :string = "level 7: dead simple"
+export const HUSTR_8	  :string = "level 8: tricks and traps"
+export const HUSTR_9	  :string = "level 9: the pit"
+export const HUSTR_10	  :string = "level 10: refueling base"
+export const HUSTR_11	  :string = "level 11: 'o' of destruction!"
 
-#define HUSTR_12	"level 12: the factory"
-#define HUSTR_13	"level 13: downtown"
-#define HUSTR_14	"level 14: the inmost dens"
-#define HUSTR_15	"level 15: industrial zone"
-#define HUSTR_16	"level 16: suburbs"
-#define HUSTR_17	"level 17: tenements"
-#define HUSTR_18	"level 18: the courtyard"
-#define HUSTR_19	"level 19: the citadel"
-#define HUSTR_20	"level 20: gotcha!"
+export const HUSTR_12	"level 12: the factory"
+export const HUSTR_13	"level 13: downtown"
+export const HUSTR_14	"level 14: the inmost dens"
+export const HUSTR_15	"level 15: industrial zone"
+export const HUSTR_16	"level 16: suburbs"
+export const HUSTR_17	"level 17: tenements"
+export const HUSTR_18	"level 18: the courtyard"
+export const HUSTR_19	"level 19: the citadel"
+export const HUSTR_20	"level 20: gotcha!"
 
 #define HUSTR_21	"level 21: nirvana"
 #define HUSTR_22	"level 22: the catacombs"
@@ -353,6 +353,10 @@
 #define STSTR_CHOPPERS	"... doesn't suck - GM"
 #define STSTR_CLEV		"Changing Level..."
 
+  
+  //:::STOP:::
+  
+  
 //
 //	F_Finale.C
 //
