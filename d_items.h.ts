@@ -42,7 +42,7 @@ export interface weaponinfo_t
 
 }
 
-globalThis. weaponinfo  :weaponinfo_t[];      //length = NUMWEAPONS
+//globalThis. weaponinfo  :weaponinfo_t[];      //length = NUMWEAPONS
 
 }
 //-----------------------------------------------------------------------------
