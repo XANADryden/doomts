@@ -20,16 +20,16 @@
 //
 //-----------------------------------------------------------------------------
 
-static const char
-rcsid[] = "$Id:$";
+//static const char
+//rcsid[] = "$Id:$";
 
 // We are referring to sprite numbers.
-#include "info.h"
+import "info.h.ts";
 
-#ifdef __GNUG__
-#pragma implementation "d_items.h"
-#endif
-#include "d_items.h"
+//#ifdef __GNUG__
+//#pragma implementation "d_items.h"
+//#endif
+import "d_items.h.ts";
 
 
 //
@@ -44,25 +44,25 @@ rcsid[] = "$Id:$";
 // atkstate, i.e. attack/fire/hit frame
 // flashstate, muzzle flash
 //
-weaponinfo_t	weaponinfo[NUMWEAPONS] =
-{
+weaponinfo :weaponinfo_t[] =         //length = NUMWEAPONS
+[
     {
-	// fist
-	am_noammo,
-	S_PUNCHUP,
-	S_PUNCHDOWN,
-	S_PUNCH,
-	S_PUNCH1,
-	S_NULL
+        // fist
+        ammo = am_noammo,
+        upstate = S_PUNCHUP,
+        S_PUNCHDOWN,
+        S_PUNCH,
+        S_PUNCH1,
+        S_NULL
     },	
     {
-	// pistol
-	am_clip,
-	S_PISTOLUP,
-	S_PISTOLDOWN,
-	S_PISTOL,
-	S_PISTOL1,
-	S_PISTOLFLASH
+        // pistol
+        am_clip,
+        S_PISTOLUP,
+        S_PISTOLDOWN,
+        S_PISTOL,
+        S_PISTOL1,
+        S_PISTOLFLASH
     },	
     {
 	// shotgun
