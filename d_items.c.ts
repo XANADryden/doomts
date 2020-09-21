@@ -44,95 +44,87 @@ import "d_items.h.ts";
 // atkstate, i.e. attack/fire/hit frame
 // flashstate, muzzle flash
 //
-weaponinfo :weaponinfo_t[] =         //length = NUMWEAPONS
+globalThis.weaponinfo :weaponinfo_t[] =         //length = NUMWEAPONS
 [
     {
         // fist
-        ammo = am_noammo,
-        upstate = S_PUNCHUP,
-        S_PUNCHDOWN,
-        S_PUNCH,
-        S_PUNCH1,
-        S_NULL
-    },	
+        ammo : am_noammo,
+        upstate : S_PUNCHUP,
+        downstate : S_PUNCHDOWN,
+        readystate : S_PUNCH,
+        atkstate : S_PUNCH1,
+        flashstate : S_NULL
+    },    
     {
         // pistol
-        am_clip,
-        S_PISTOLUP,
-        S_PISTOLDOWN,
-        S_PISTOL,
-        S_PISTOL1,
-        S_PISTOLFLASH
-    },	
+        ammo : am_clip,
+        upstate : S_PISTOLUP,
+        downstate : S_PISTOLDOWN,
+        readystate : S_PISTOL,
+        atkstate : S_PISTOL1,
+        flashstate : S_PISTOLFLASH
+    },    
     {
-	// shotgun
-	am_shell,
-	S_SGUNUP,
-	S_SGUNDOWN,
-	S_SGUN,
-	S_SGUN1,
-	S_SGUNFLASH1
+        // shotgun
+        ammo : am_shell,
+        upstate : S_SGUNUP,
+        downstate : S_SGUNDOWN,
+        readystate : S_SGUN,
+        atkstate : S_SGUN1,
+        flashstate : S_SGUNFLASH1
     },
     {
-	// chaingun
-	am_clip,
-	S_CHAINUP,
-	S_CHAINDOWN,
-	S_CHAIN,
-	S_CHAIN1,
-	S_CHAINFLASH1
+        // chaingun
+        ammo : am_clip,
+        upstate : S_CHAINUP,
+        downstate : S_CHAINDOWN,
+        readystate : S_CHAIN,
+        atkstate : S_CHAIN1,
+        flashstate : S_CHAINFLASH1
     },
     {
-	// missile launcher
-	am_misl,
-	S_MISSILEUP,
-	S_MISSILEDOWN,
-	S_MISSILE,
-	S_MISSILE1,
-	S_MISSILEFLASH1
+        // missile launcher
+        ammo : am_misl,
+        upstate : S_MISSILEUP,
+        downstate : S_MISSILEDOWN,
+        readystate : S_MISSILE,
+        atkstate : S_MISSILE1,
+        flashstate : S_MISSILEFLASH1
     },
     {
-	// plasma rifle
-	am_cell,
-	S_PLASMAUP,
-	S_PLASMADOWN,
-	S_PLASMA,
-	S_PLASMA1,
-	S_PLASMAFLASH1
+        // plasma rifle
+        ammo : am_cell,
+        upstate : S_PLASMAUP,
+        downstate : S_PLASMADOWN,
+        readystate : S_PLASMA,
+        atkstate : S_PLASMA1,
+        flashstate : S_PLASMAFLASH1
     },
     {
-	// bfg 9000
-	am_cell,
-	S_BFGUP,
-	S_BFGDOWN,
-	S_BFG,
-	S_BFG1,
-	S_BFGFLASH1
+        // bfg 9000
+        ammo : am_cell,
+        upstate : S_BFGUP,
+        downstate : S_BFGDOWN,
+        readystate : S_BFG,
+        atkstate : S_BFG1,
+        flashstate : S_BFGFLASH1
     },
     {
-	// chainsaw
-	am_noammo,
-	S_SAWUP,
-	S_SAWDOWN,
-	S_SAW,
-	S_SAW1,
-	S_NULL
+        // chainsaw
+        ammo : am_noammo,
+        upstate : S_SAWUP,
+        downstate : S_SAWDOWN,
+        readystate : S_SAW,
+        atkstate : S_SAW1,
+        flashstate : S_NULL
     },
     {
-	// super shotgun
-	am_shell,
-	S_DSGUNUP,
-	S_DSGUNDOWN,
-	S_DSGUN,
-	S_DSGUN1,
-	S_DSGUNFLASH1
-    },	
-};
-
-
-
-
-
-
-
-
+        // super shotgun
+        ammo : am_shell,
+        upstate : S_DSGUNUP,
+        downstate : S_DSGUNDOWN,
+        readystate : S_DSGUN,
+        atkstate : S_DSGUN1,
+        flashstate : S_DSGUNFLASH1
+    },    
+];
