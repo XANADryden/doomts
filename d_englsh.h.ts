@@ -19,7 +19,7 @@
 //	English language support (default).
 //
 //-----------------------------------------------------------------------------
-
+\n[\s{2}\t]
 if (typeof __D_ENGLSH__ == "undefined"){
   export const __D_ENGLSH__ :boolean = true;
   
@@ -137,7 +137,7 @@ export const GGSAVED	:string = "game saved.";
 //
 //	HU_stuff.C
 //
-export const HUSTR_MSGU	"[Message unsent]"
+export const HUSTR_MSGU	"[Message unsent]";
 
 export const HUSTR_E1M1	:string = "E1M1: Hangar";
 export const HUSTR_E1M2	:string = "E1M2: Nuclear Plant";
@@ -179,179 +179,179 @@ export const HUSTR_E4M7	:string = "E4M7: And Hell Followed";
 export const HUSTR_E4M8	:string = "E4M8: Unto The Cruel";
 export const HUSTR_E4M9	:string = "E4M9: Fear";
 
-export const HUSTR_1	  :string = "level 1: entryway"
-export const HUSTR_2	  :string = "level 2: underhalls"
-export const HUSTR_3	  :string = "level 3: the gantlet"
-export const HUSTR_4	  :string = "level 4: the focus"
-export const HUSTR_5	  :string = "level 5: the waste tunnels"
-export const HUSTR_6	  :string = "level 6: the crusher"
-export const HUSTR_7	  :string = "level 7: dead simple"
-export const HUSTR_8	  :string = "level 8: tricks and traps"
-export const HUSTR_9	  :string = "level 9: the pit"
-export const HUSTR_10	  :string = "level 10: refueling base"
-export const HUSTR_11	  :string = "level 11: 'o' of destruction!"
+export const HUSTR_1	  :string = "level 1: entryway";
+export const HUSTR_2	  :string = "level 2: underhalls";
+export const HUSTR_3	  :string = "level 3: the gantlet";
+export const HUSTR_4	  :string = "level 4: the focus";
+export const HUSTR_5	  :string = "level 5: the waste tunnels";
+export const HUSTR_6	  :string = "level 6: the crusher";
+export const HUSTR_7	  :string = "level 7: dead simple";
+export const HUSTR_8	  :string = "level 8: tricks and traps";
+export const HUSTR_9	  :string = "level 9: the pit";
+export const HUSTR_10	  :string = "level 10: refueling base";
+export const HUSTR_11	  :string = "level 11: 'o' of destruction!";
 
-export const HUSTR_12	"level 12: the factory"
-export const HUSTR_13	"level 13: downtown"
-export const HUSTR_14	"level 14: the inmost dens"
-export const HUSTR_15	"level 15: industrial zone"
-export const HUSTR_16	"level 16: suburbs"
-export const HUSTR_17	"level 17: tenements"
-export const HUSTR_18	"level 18: the courtyard"
-export const HUSTR_19	"level 19: the citadel"
-export const HUSTR_20	"level 20: gotcha!"
+export const HUSTR_12	:string = "level 12: the factory";
+export const HUSTR_13 :string = "level 13: downtown";
+export const HUSTR_14	:string = "level 14: the inmost dens";
+export const HUSTR_15	:string = "level 15: industrial zone";
+export const HUSTR_16	:string = "level 16: suburbs";
+export const HUSTR_17	:string = "level 17: tenements";
+export const HUSTR_18	:string = "level 18: the courtyard";
+export const HUSTR_19	:string = "level 19: the citadel";
+export const HUSTR_20	:string = "level 20: gotcha!";
 
-#define HUSTR_21	"level 21: nirvana"
-#define HUSTR_22	"level 22: the catacombs"
-#define HUSTR_23	"level 23: barrels o' fun"
-#define HUSTR_24	"level 24: the chasm"
-#define HUSTR_25	"level 25: bloodfalls"
-#define HUSTR_26	"level 26: the abandoned mines"
-#define HUSTR_27	"level 27: monster condo"
-#define HUSTR_28	"level 28: the spirit world"
-#define HUSTR_29	"level 29: the living end"
-#define HUSTR_30	"level 30: icon of sin"
+export const HUSTR_21	:string = "level 21: nirvana";
+export const HUSTR_22	:string = "level 22: the catacombs";
+export const HUSTR_23	:string = "level 23: barrels o' fun";
+export const HUSTR_24	:string = "level 24: the chasm";
+export const HUSTR_25	:string = "level 25: bloodfalls";
+export const HUSTR_26	:string = "level 26: the abandoned mines";
+export const HUSTR_27	:string = "level 27: monster condo";
+export const HUSTR_28	:string = "level 28: the spirit world";
+export const HUSTR_29	:string = "level 29: the living end";
+export const HUSTR_30	:string = "level 30: icon of sin";
 
-#define HUSTR_31	"level 31: wolfenstein"
-#define HUSTR_32	"level 32: grosse"
+export const HUSTR_31	:string = "level 31: wolfenstein";
+export const HUSTR_32	:string = "level 32: grosse";
 
-#define PHUSTR_1	"level 1: congo"
-#define PHUSTR_2	"level 2: well of souls"
-#define PHUSTR_3	"level 3: aztec"
-#define PHUSTR_4	"level 4: caged"
-#define PHUSTR_5	"level 5: ghost town"
-#define PHUSTR_6	"level 6: baron's lair"
-#define PHUSTR_7	"level 7: caughtyard"
-#define PHUSTR_8	"level 8: realm"
-#define PHUSTR_9	"level 9: abattoire"
-#define PHUSTR_10	"level 10: onslaught"
-#define PHUSTR_11	"level 11: hunted"
+export const PHUSTR_1	  :string = "level 1: congo";
+export const PHUSTR_2	  :string = "level 2: well of souls";
+export const PHUSTR_3	  :string = "level 3: aztec";
+export const PHUSTR_4	  :string = "level 4: caged";
+export const PHUSTR_5	  :string = "level 5: ghost town";
+export const PHUSTR_6	  :string = "level 6: baron's lair";
+export const PHUSTR_7	  :string = "level 7: caughtyard";
+export const PHUSTR_8	  :string = "level 8: realm";
+export const PHUSTR_9	  :string = "level 9: abattoire";
+export const PHUSTR_10	:string = "level 10: onslaught";
+export const PHUSTR_11	:string = "level 11: hunted";
 
-#define PHUSTR_12	"level 12: speed"
-#define PHUSTR_13	"level 13: the crypt"
-#define PHUSTR_14	"level 14: genesis"
-#define PHUSTR_15	"level 15: the twilight"
-#define PHUSTR_16	"level 16: the omen"
-#define PHUSTR_17	"level 17: compound"
-#define PHUSTR_18	"level 18: neurosphere"
-#define PHUSTR_19	"level 19: nme"
-#define PHUSTR_20	"level 20: the death domain"
+export const PHUSTR_12	:string = "level 12: speed";
+export const PHUSTR_13	:string = "level 13: the crypt";
+export const PHUSTR_14	:string = "level 14: genesis";
+export const PHUSTR_15	:string = "level 15: the twilight";
+export const PHUSTR_16	:string = "level 16: the omen";
+export const PHUSTR_17	:string = "level 17: compound";
+export const PHUSTR_18	:string = "level 18: neurosphere";
+export const PHUSTR_19	:string = "level 19: nme";
+export const PHUSTR_20	:string = "level 20: the death domain";
 
-#define PHUSTR_21	"level 21: slayer"
-#define PHUSTR_22	"level 22: impossible mission"
-#define PHUSTR_23	"level 23: tombstone"
-#define PHUSTR_24	"level 24: the final frontier"
-#define PHUSTR_25	"level 25: the temple of darkness"
-#define PHUSTR_26	"level 26: bunker"
-#define PHUSTR_27	"level 27: anti-christ"
-#define PHUSTR_28	"level 28: the sewers"
-#define PHUSTR_29	"level 29: odyssey of noises"
-#define PHUSTR_30	"level 30: the gateway of hell"
+export const PHUSTR_21	:string = "level 21: slayer";
+export const PHUSTR_22	:string = "level 22: impossible mission";
+export const PHUSTR_23	:string = "level 23: tombstone";
+export const PHUSTR_24	:string = "level 24: the final frontier";
+export const PHUSTR_25	:string = "level 25: the temple of darkness";
+export const PHUSTR_26	:string = "level 26: bunker";
+export const PHUSTR_27	:string = "level 27: anti-christ";
+export const PHUSTR_28	:string = "level 28: the sewers";
+export const PHUSTR_29	:string = "level 29: odyssey of noises";
+export const PHUSTR_30	:string = "level 30: the gateway of hell";
 
-#define PHUSTR_31	"level 31: cyberden"
-#define PHUSTR_32	"level 32: go 2 it"
+export const PHUSTR_31	:string = "level 31: cyberden";
+export const PHUSTR_32	:string = "level 32: go 2 it";
 
-#define THUSTR_1	"level 1: system control"
-#define THUSTR_2	"level 2: human bbq"
-#define THUSTR_3	"level 3: power control"
-#define THUSTR_4	"level 4: wormhole"
-#define THUSTR_5	"level 5: hanger"
-#define THUSTR_6	"level 6: open season"
-#define THUSTR_7	"level 7: prison"
-#define THUSTR_8	"level 8: metal"
-#define THUSTR_9	"level 9: stronghold"
-#define THUSTR_10	"level 10: redemption"
-#define THUSTR_11	"level 11: storage facility"
+export const THUSTR_1	  :string = "level 1: system control";
+export const THUSTR_2	  :string = "level 2: human bbq";
+export const THUSTR_3	  :string = "level 3: power control";
+export const THUSTR_4	  :string = "level 4: wormhole";
+export const THUSTR_5	  :string = "level 5: hanger";
+export const THUSTR_6	  :string = "level 6: open season";
+export const THUSTR_7	  :string = "level 7: prison";
+export const THUSTR_8	  :string = "level 8: metal";
+export const THUSTR_9	  :string = "level 9: stronghold";
+export const THUSTR_10	:string = "level 10: redemption";
+export const THUSTR_11	:string = "level 11: storage facility";
 
-#define THUSTR_12	"level 12: crater"
-#define THUSTR_13	"level 13: nukage processing"
-#define THUSTR_14	"level 14: steel works"
-#define THUSTR_15	"level 15: dead zone"
-#define THUSTR_16	"level 16: deepest reaches"
-#define THUSTR_17	"level 17: processing area"
-#define THUSTR_18	"level 18: mill"
-#define THUSTR_19	"level 19: shipping/respawning"
-#define THUSTR_20	"level 20: central processing"
+export const THUSTR_12	:string = "level 12: crater";
+export const THUSTR_13	:string = "level 13: nukage processing";
+export const THUSTR_14	:string = "level 14: steel works";
+export const THUSTR_15	:string = "level 15: dead zone";
+export const THUSTR_16	:string = "level 16: deepest reaches";
+export const THUSTR_17	:string = "level 17: processing area";
+export const THUSTR_18	:string = "level 18: mill";
+export const THUSTR_19	:string = "level 19: shipping/respawning";
+export const THUSTR_20	:string = "level 20: central processing";
 
-#define THUSTR_21	"level 21: administration center"
-#define THUSTR_22	"level 22: habitat"
-#define THUSTR_23	"level 23: lunar mining project"
-#define THUSTR_24	"level 24: quarry"
-#define THUSTR_25	"level 25: baron's den"
-#define THUSTR_26	"level 26: ballistyx"
-#define THUSTR_27	"level 27: mount pain"
-#define THUSTR_28	"level 28: heck"
-#define THUSTR_29	"level 29: river styx"
-#define THUSTR_30	"level 30: last call"
+export const THUSTR_21	:string = "level 21: administration center";
+export const THUSTR_22	:string = "level 22: habitat";
+export const THUSTR_23	:string = "level 23: lunar mining project";
+export const THUSTR_24	:string = "level 24: quarry";
+export const THUSTR_25	:string = "level 25: baron's den";
+export const THUSTR_26	:string = "level 26: ballistyx";
+export const THUSTR_27	:string = "level 27: mount pain";
+export const THUSTR_28	:string = "level 28: heck";
+export const THUSTR_29	:string = "level 29: river styx";
+export const THUSTR_30	:string = "level 30: last call";
 
-#define THUSTR_31	"level 31: pharaoh"
-#define THUSTR_32	"level 32: caribbean"
+export const THUSTR_31	:string = "level 31: pharaoh";
+export const THUSTR_32	:string = "level 32: caribbean";
 
-#define HUSTR_CHATMACRO1	"I'm ready to kick butt!"
-#define HUSTR_CHATMACRO2	"I'm OK."
-#define HUSTR_CHATMACRO3	"I'm not looking too good!"
-#define HUSTR_CHATMACRO4	"Help!"
-#define HUSTR_CHATMACRO5	"You suck!"
-#define HUSTR_CHATMACRO6	"Next time, scumbag..."
-#define HUSTR_CHATMACRO7	"Come here!"
-#define HUSTR_CHATMACRO8	"I'll take care of it."
-#define HUSTR_CHATMACRO9	"Yes"
-#define HUSTR_CHATMACRO0	"No"
+export const HUSTR_CHATMACRO1	:string = "I'm ready to kick butt!";
+export const HUSTR_CHATMACRO2	:string = "I'm OK.";
+export const HUSTR_CHATMACRO3	:string = "I'm not looking too good!";
+export const HUSTR_CHATMACRO4	:string = "Help!";
+export const HUSTR_CHATMACRO5	:string = "You suck!";
+export const HUSTR_CHATMACRO6	:string = "Next time, scumbag...";
+export const HUSTR_CHATMACRO7	:string = "Come here!";
+export const HUSTR_CHATMACRO8	:string = "I'll take care of it.";
+export const HUSTR_CHATMACRO9	:string = "Yes";
+export const HUSTR_CHATMACRO0	:string = "No";
 
-#define HUSTR_TALKTOSELF1	"You mumble to yourself"
-#define HUSTR_TALKTOSELF2	"Who's there?"
-#define HUSTR_TALKTOSELF3	"You scare yourself"
-#define HUSTR_TALKTOSELF4	"You start to rave"
-#define HUSTR_TALKTOSELF5	"You've lost it..."
+export const HUSTR_TALKTOSELF1	:string = "You mumble to yourself";
+export const HUSTR_TALKTOSELF2	:string = "Who's there?";
+export const HUSTR_TALKTOSELF3	:string = "You scare yourself";
+export const HUSTR_TALKTOSELF4	:string = "You start to rave";
+export const HUSTR_TALKTOSELF5	:string = "You've lost it...";
 
-#define HUSTR_MESSAGESENT	"[Message Sent]"
+export const HUSTR_MESSAGESENT	:string = "[Message Sent]";
 
 // The following should NOT be changed unless it seems
 // just AWFULLY necessary
 
-#define HUSTR_PLRGREEN	"Green: "
-#define HUSTR_PLRINDIGO	"Indigo: "
-#define HUSTR_PLRBROWN	"Brown: "
-#define HUSTR_PLRRED		"Red: "
+export const HUSTR_PLRGREEN	  :string = "Green: ";
+export const HUSTR_PLRINDIGO	:string = "Indigo: ";
+export const HUSTR_PLRBROWN	  :string = "Brown: ";
+export const HUSTR_PLRRED		  :string = "Red: ";
 
-#define HUSTR_KEYGREEN	'g'
-#define HUSTR_KEYINDIGO	'i'
-#define HUSTR_KEYBROWN	'b'
-#define HUSTR_KEYRED	'r'
+export const HUSTR_KEYGREEN	  :string = 'g';
+export const HUSTR_KEYINDIGO	:string = 'i';
+export const HUSTR_KEYBROWN	  :string = 'b';
+export const HUSTR_KEYRED	    :string = 'r';
 
 //
 //	AM_map.C
 //
 
-#define AMSTR_FOLLOWON	"Follow Mode ON"
-#define AMSTR_FOLLOWOFF	"Follow Mode OFF"
+export const AMSTR_FOLLOWON	:string = "Follow Mode ON";
+export const AMSTR_FOLLOWOFF	:string = "Follow Mode OFF";
 
-#define AMSTR_GRIDON	"Grid ON"
-#define AMSTR_GRIDOFF	"Grid OFF"
+export const AMSTR_GRIDON	:string = "Grid ON";
+export const AMSTR_GRIDOFF	:string = "Grid OFF";
 
-#define AMSTR_MARKEDSPOT	"Marked Spot"
-#define AMSTR_MARKSCLEARED	"All Marks Cleared"
+export const AMSTR_MARKEDSPOT	:string = "Marked Spot";
+export const AMSTR_MARKSCLEARED	:string = "All Marks Cleared";
 
 //
 //	ST_stuff.C
 //
 
-#define STSTR_MUS		"Music Change"
-#define STSTR_NOMUS		"IMPOSSIBLE SELECTION"
-#define STSTR_DQDON		"Degreelessness Mode On"
-#define STSTR_DQDOFF	"Degreelessness Mode Off"
+export const STSTR_MUS		:string = "Music Change";
+export const STSTR_NOMUS		:string = "IMPOSSIBLE SELECTION";
+export const STSTR_DQDON		:string = "Degreelessness Mode On";
+export const STSTR_DQDOFF	:string = "Degreelessness Mode Off";
 
-#define STSTR_KFAADDED	"Very Happy Ammo Added"
-#define STSTR_FAADDED	"Ammo (no keys) Added"
+export const STSTR_KFAADDED	:string = "Very Happy Ammo Added";
+export const STSTR_FAADDED	:string = "Ammo (no keys) Added";
 
-#define STSTR_NCON		"No Clipping Mode ON"
-#define STSTR_NCOFF		"No Clipping Mode OFF"
+export const STSTR_NCON		:string = "No Clipping Mode ON";
+export const STSTR_NCOFF		:string = "No Clipping Mode OFF";
 
-#define STSTR_BEHOLD	"inVuln, Str, Inviso, Rad, Allmap, or Lite-amp"
-#define STSTR_BEHOLDX	"Power-up Toggled"
+export const STSTR_BEHOLD	:string = "inVuln, Str, Inviso, Rad, Allmap, or Lite-amp";
+export const STSTR_BEHOLDX	:string = "Power-up Toggled";
 
-#define STSTR_CHOPPERS	"... doesn't suck - GM"
-#define STSTR_CLEV		"Changing Level..."
+export const STSTR_CHOPPERS	:string = "... doesn't suck - GM";
+export const STSTR_CLEV		:string = "Changing Level...";
 
   
   //:::STOP:::
@@ -360,344 +360,342 @@ export const HUSTR_20	"level 20: gotcha!"
 //
 //	F_Finale.C
 //
-#define E1TEXT \
-"Once you beat the big badasses and\n"\
-"clean out the moon base you're supposed\n"\
-"to win, aren't you? Aren't you? Where's\n"\
-"your fat reward and ticket home? What\n"\
-"the hell is this? It's not supposed to\n"\
-"end this way!\n"\
-"\n" \
-"It stinks like rotten meat, but looks\n"\
-"like the lost Deimos base.  Looks like\n"\
-"you're stuck on The Shores of Hell.\n"\
-"The only way out is through.\n"\
-"\n"\
-"To continue the DOOM experience, play\n"\
-"The Shores of Hell and its amazing\n"\
-"sequel, Inferno!\n"
+export const E1TEXT :string = "Once you beat the big badasses and\n" +
+"clean out the moon base you're supposed\n" +
+"to win, aren't you? Aren't you? Where's\n" +
+"your fat reward and ticket home? What\n" +
+"the hell is this? It's not supposed to\n" +
+"end this way!\n" +
+"\n" +
+"It stinks like rotten meat, but looks\n" +
+"like the lost Deimos base.  Looks like\n" +
+"you're stuck on The Shores of Hell.\n" +
+"The only way out is through.\n" +
+"\n" +
+"To continue the DOOM experience, play\n" +
+"The Shores of Hell and its amazing\n" +
+"sequel, Inferno!\n";
 
 
-#define E2TEXT \
-"You've done it! The hideous cyber-\n"\
-"demon lord that ruled the lost Deimos\n"\
-"moon base has been slain and you\n"\
-"are triumphant! But ... where are\n"\
-"you? You clamber to the edge of the\n"\
-"moon and look down to see the awful\n"\
-"truth.\n" \
-"\n"\
-"Deimos floats above Hell itself!\n"\
-"You've never heard of anyone escaping\n"\
-"from Hell, but you'll make the bastards\n"\
-"sorry they ever heard of you! Quickly,\n"\
-"you rappel down to  the surface of\n"\
-"Hell.\n"\
-"\n" \
-"Now, it's on to the final chapter of\n"\
-"DOOM! -- Inferno."
+export const E2TEXT :string = 
+"You've done it! The hideous cyber-\n" +
+"demon lord that ruled the lost Deimos\n" +
+"moon base has been slain and you\n" +
+"are triumphant! But ... where are\n" +
+"you? You clamber to the edge of the\n" +
+"moon and look down to see the awful\n" +
+"truth.\n" +
+"\n" +
+"Deimos floats above Hell itself!\n" +
+"You've never heard of anyone escaping\n" +
+"from Hell, but you'll make the bastards\n" +
+"sorry they ever heard of you! Quickly,\n" +
+"you rappel down to  the surface of\n" +
+"Hell.\n" +
+"\n" +
+"Now, it's on to the final chapter of\n" +
+"DOOM! -- Inferno.";
 
 
-#define E3TEXT \
-"The loathsome spiderdemon that\n"\
-"masterminded the invasion of the moon\n"\
-"bases and caused so much death has had\n"\
-"its ass kicked for all time.\n"\
-"\n"\
-"A hidden doorway opens and you enter.\n"\
-"You've proven too tough for Hell to\n"\
-"contain, and now Hell at last plays\n"\
-"fair -- for you emerge from the door\n"\
-"to see the green fields of Earth!\n"\
-"Home at last.\n" \
-"\n"\
-"You wonder what's been happening on\n"\
-"Earth while you were battling evil\n"\
-"unleashed. It's good that no Hell-\n"\
-"spawn could have come through that\n"\
-"door with you ..."
+export const E3TEXT :string = 
+"The loathsome spiderdemon that\n" +
+"masterminded the invasion of the moon\n" +
+"bases and caused so much death has had\n" +
+"its ass kicked for all time.\n" +
+"\n" +
+"A hidden doorway opens and you enter.\n" +
+"You've proven too tough for Hell to\n" +
+"contain, and now Hell at last plays\n" +
+"fair -- for you emerge from the door\n" +
+"to see the green fields of Earth!\n" +
+"Home at last.\n" +
+"\n" +
+"You wonder what's been happening on\n" +
+"Earth while you were battling evil\n" +
+"unleashed. It's good that no Hell-\n" +
+"spawn could have come through that\n" +
+"door with you ...";
 
 
-#define E4TEXT \
-"the spider mastermind must have sent forth\n"\
-"its legions of hellspawn before your\n"\
-"final confrontation with that terrible\n"\
-"beast from hell.  but you stepped forward\n"\
-"and brought forth eternal damnation and\n"\
-"suffering upon the horde as a true hero\n"\
-"would in the face of something so evil.\n"\
-"\n"\
-"besides, someone was gonna pay for what\n"\
-"happened to daisy, your pet rabbit.\n"\
-"\n"\
-"but now, you see spread before you more\n"\
-"potential pain and gibbitude as a nation\n"\
-"of demons run amok among our cities.\n"\
-"\n"\
-"next stop, hell on earth!"
+export const E4TEXT :string =
+"the spider mastermind must have sent forth\n" +
+"its legions of hellspawn before your\n" +
+"final confrontation with that terrible\n" +
+"beast from hell.  but you stepped forward\n" +
+"and brought forth eternal damnation and\n" +
+"suffering upon the horde as a true hero\n" +
+"would in the face of something so evil.\n" +
+"\n" +
+"besides, someone was gonna pay for what\n" +
+"happened to daisy, your pet rabbit.\n" +
+"\n" +
+"but now, you see spread before you more\n" +
+"potential pain and gibbitude as a nation\n" +
+"of demons run amok among our cities.\n" +
+"\n" +
+"next stop, hell on earth!";
 
 
 // after level 6, put this:
 
-#define C1TEXT \
-"YOU HAVE ENTERED DEEPLY INTO THE INFESTED\n" \
-"STARPORT. BUT SOMETHING IS WRONG. THE\n" \
-"MONSTERS HAVE BROUGHT THEIR OWN REALITY\n" \
-"WITH THEM, AND THE STARPORT'S TECHNOLOGY\n" \
-"IS BEING SUBVERTED BY THEIR PRESENCE.\n" \
-"\n"\
-"AHEAD, YOU SEE AN OUTPOST OF HELL, A\n" \
-"FORTIFIED ZONE. IF YOU CAN GET PAST IT,\n" \
-"YOU CAN PENETRATE INTO THE HAUNTED HEART\n" \
-"OF THE STARBASE AND FIND THE CONTROLLING\n" \
-"SWITCH WHICH HOLDS EARTH'S POPULATION\n" \
-"HOSTAGE."
+export const C1TEXT :string = 
+"YOU HAVE ENTERED DEEPLY INTO THE INFESTED\n" +
+"STARPORT. BUT SOMETHING IS WRONG. THE\n" +
+"MONSTERS HAVE BROUGHT THEIR OWN REALITY\n" +
+"WITH THEM, AND THE STARPORT'S TECHNOLOGY\n" +
+"IS BEING SUBVERTED BY THEIR PRESENCE.\n" +
+"\n" +
+"AHEAD, YOU SEE AN OUTPOST OF HELL, A\n" +
+"FORTIFIED ZONE. IF YOU CAN GET PAST IT,\n" +
+"YOU CAN PENETRATE INTO THE HAUNTED HEART\n" +
+"OF THE STARBASE AND FIND THE CONTROLLING\n" +
+"SWITCH WHICH HOLDS EARTH'S POPULATION\n" +
+"HOSTAGE.";
 
 // After level 11, put this:
 
-#define C2TEXT \
-"YOU HAVE WON! YOUR VICTORY HAS ENABLED\n" \
-"HUMANKIND TO EVACUATE EARTH AND ESCAPE\n"\
-"THE NIGHTMARE.  NOW YOU ARE THE ONLY\n"\
-"HUMAN LEFT ON THE FACE OF THE PLANET.\n"\
-"CANNIBAL MUTATIONS, CARNIVOROUS ALIENS,\n"\
-"AND EVIL SPIRITS ARE YOUR ONLY NEIGHBORS.\n"\
-"YOU SIT BACK AND WAIT FOR DEATH, CONTENT\n"\
-"THAT YOU HAVE SAVED YOUR SPECIES.\n"\
-"\n"\
-"BUT THEN, EARTH CONTROL BEAMS DOWN A\n"\
-"MESSAGE FROM SPACE: \"SENSORS HAVE LOCATED\n"\
-"THE SOURCE OF THE ALIEN INVASION. IF YOU\n"\
-"GO THERE, YOU MAY BE ABLE TO BLOCK THEIR\n"\
-"ENTRY.  THE ALIEN BASE IS IN THE HEART OF\n"\
-"YOUR OWN HOME CITY, NOT FAR FROM THE\n"\
-"STARPORT.\" SLOWLY AND PAINFULLY YOU GET\n"\
-"UP AND RETURN TO THE FRAY."
+export const C2TEXT :string = 
+"YOU HAVE WON! YOUR VICTORY HAS ENABLED\n" +
+"HUMANKIND TO EVACUATE EARTH AND ESCAPE\n" +
+"THE NIGHTMARE.  NOW YOU ARE THE ONLY\n" +
+"HUMAN LEFT ON THE FACE OF THE PLANET.\n" +
+"CANNIBAL MUTATIONS, CARNIVOROUS ALIENS,\n" +
+"AND EVIL SPIRITS ARE YOUR ONLY NEIGHBORS.\n" +
+"YOU SIT BACK AND WAIT FOR DEATH, CONTENT\n" +
+"THAT YOU HAVE SAVED YOUR SPECIES.\n" +
+"\n" +
+"BUT THEN, EARTH CONTROL BEAMS DOWN A\n" +
+"MESSAGE FROM SPACE: \"SENSORS HAVE LOCATED\n" +
+"THE SOURCE OF THE ALIEN INVASION. IF YOU\n" +
+"GO THERE, YOU MAY BE ABLE TO BLOCK THEIR\n" +
+"ENTRY.  THE ALIEN BASE IS IN THE HEART OF\n" +
+"YOUR OWN HOME CITY, NOT FAR FROM THE\n" +
+"STARPORT.\" SLOWLY AND PAINFULLY YOU GET\n" +
+"UP AND RETURN TO THE FRAY.";
 
 
 // After level 20, put this:
 
-#define C3TEXT \
-"YOU ARE AT THE CORRUPT HEART OF THE CITY,\n"\
-"SURROUNDED BY THE CORPSES OF YOUR ENEMIES.\n"\
-"YOU SEE NO WAY TO DESTROY THE CREATURES'\n"\
-"ENTRYWAY ON THIS SIDE, SO YOU CLENCH YOUR\n"\
-"TEETH AND PLUNGE THROUGH IT.\n"\
-"\n"\
-"THERE MUST BE A WAY TO CLOSE IT ON THE\n"\
-"OTHER SIDE. WHAT DO YOU CARE IF YOU'VE\n"\
-"GOT TO GO THROUGH HELL TO GET TO IT?"
+export const C3TEXT :string = 
+"YOU ARE AT THE CORRUPT HEART OF THE CITY,\n" +
+"SURROUNDED BY THE CORPSES OF YOUR ENEMIES.\n" +
+"YOU SEE NO WAY TO DESTROY THE CREATURES'\n" +
+"ENTRYWAY ON THIS SIDE, SO YOU CLENCH YOUR\n" +
+"TEETH AND PLUNGE THROUGH IT.\n" +
+"\n" +
+"THERE MUST BE A WAY TO CLOSE IT ON THE\n" +
+"OTHER SIDE. WHAT DO YOU CARE IF YOU'VE\n" +
+"GOT TO GO THROUGH HELL TO GET TO IT?";
 
 
 // After level 29, put this:
 
-#define C4TEXT \
-"THE HORRENDOUS VISAGE OF THE BIGGEST\n"\
-"DEMON YOU'VE EVER SEEN CRUMBLES BEFORE\n"\
-"YOU, AFTER YOU PUMP YOUR ROCKETS INTO\n"\
-"HIS EXPOSED BRAIN. THE MONSTER SHRIVELS\n"\
-"UP AND DIES, ITS THRASHING LIMBS\n"\
-"DEVASTATING UNTOLD MILES OF HELL'S\n"\
-"SURFACE.\n"\
-"\n"\
-"YOU'VE DONE IT. THE INVASION IS OVER.\n"\
-"EARTH IS SAVED. HELL IS A WRECK. YOU\n"\
-"WONDER WHERE BAD FOLKS WILL GO WHEN THEY\n"\
-"DIE, NOW. WIPING THE SWEAT FROM YOUR\n"\
-"FOREHEAD YOU BEGIN THE LONG TREK BACK\n"\
-"HOME. REBUILDING EARTH OUGHT TO BE A\n"\
-"LOT MORE FUN THAN RUINING IT WAS.\n"
+export const C4TEXT :string = 
+"THE HORRENDOUS VISAGE OF THE BIGGEST\n" +
+"DEMON YOU'VE EVER SEEN CRUMBLES BEFORE\n" +
+"YOU, AFTER YOU PUMP YOUR ROCKETS INTO\n" +
+"HIS EXPOSED BRAIN. THE MONSTER SHRIVELS\n" +
+"UP AND DIES, ITS THRASHING LIMBS\n" +
+"DEVASTATING UNTOLD MILES OF HELL'S\n" +
+"SURFACE.\n" +
+"\n" +
+"YOU'VE DONE IT. THE INVASION IS OVER.\n" +
+"EARTH IS SAVED. HELL IS A WRECK. YOU\n" +
+"WONDER WHERE BAD FOLKS WILL GO WHEN THEY\n" +
+"DIE, NOW. WIPING THE SWEAT FROM YOUR\n" +
+"FOREHEAD YOU BEGIN THE LONG TREK BACK\n" +
+"HOME. REBUILDING EARTH OUGHT TO BE A\n" +
+"LOT MORE FUN THAN RUINING IT WAS.\n";
 
 
 
 // Before level 31, put this:
 
-#define C5TEXT \
-"CONGRATULATIONS, YOU'VE FOUND THE SECRET\n"\
-"LEVEL! LOOKS LIKE IT'S BEEN BUILT BY\n"\
-"HUMANS, RATHER THAN DEMONS. YOU WONDER\n"\
-"WHO THE INMATES OF THIS CORNER OF HELL\n"\
-"WILL BE."
+export const C5TEXT :string =
+"CONGRATULATIONS, YOU'VE FOUND THE SECRET\n" +
+"LEVEL! LOOKS LIKE IT'S BEEN BUILT BY\n" +
+"HUMANS, RATHER THAN DEMONS. YOU WONDER\n" +
+"WHO THE INMATES OF THIS CORNER OF HELL\n" +
+"WILL BE.";
 
 
 // Before level 32, put this:
 
-#define C6TEXT \
-"CONGRATULATIONS, YOU'VE FOUND THE\n"\
-"SUPER SECRET LEVEL!  YOU'D BETTER\n"\
-"BLAZE THROUGH THIS ONE!\n"
+export const C6TEXT :string =
+"CONGRATULATIONS, YOU'VE FOUND THE\n" +
+"SUPER SECRET LEVEL!  YOU'D BETTER\n" +
+"BLAZE THROUGH THIS ONE!\n";
 
 
 // after map 06	
 
-#define P1TEXT  \
-"You gloat over the steaming carcass of the\n"\
-"Guardian.  With its death, you've wrested\n"\
-"the Accelerator from the stinking claws\n"\
-"of Hell.  You relax and glance around the\n"\
-"room.  Damn!  There was supposed to be at\n"\
-"least one working prototype, but you can't\n"\
-"see it. The demons must have taken it.\n"\
-"\n"\
-"You must find the prototype, or all your\n"\
-"struggles will have been wasted. Keep\n"\
-"moving, keep fighting, keep killing.\n"\
-"Oh yes, keep living, too."
+export const P1TEXT :string =  
+"You gloat over the steaming carcass of the\n" +
+"Guardian.  With its death, you've wrested\n" +
+"the Accelerator from the stinking claws\n" +
+"of Hell.  You relax and glance around the\n" +
+"room.  Damn!  There was supposed to be at\n" +
+"least one working prototype, but you can't\n" +
+"see it. The demons must have taken it.\n" +
+"\n" +
+"You must find the prototype, or all your\n" +
+"struggles will have been wasted. Keep\n" +
+"moving, keep fighting, keep killing.\n" +
+"Oh yes, keep living, too.";
 
 
 // after map 11
 
-#define P2TEXT \
-"Even the deadly Arch-Vile labyrinth could\n"\
-"not stop you, and you've gotten to the\n"\
-"prototype Accelerator which is soon\n"\
-"efficiently and permanently deactivated.\n"\
-"\n"\
-"You're good at that kind of thing."
+export const P2TEXT :string =
+"Even the deadly Arch-Vile labyrinth could\n" +
+"not stop you, and you've gotten to the\n" +
+"prototype Accelerator which is soon\n" +
+"efficiently and permanently deactivated.\n" +
+"\n" +
+"You're good at that kind of thing.";
 
 
 // after map 20
 
-#define P3TEXT \
-"You've bashed and battered your way into\n"\
-"the heart of the devil-hive.  Time for a\n"\
-"Search-and-Destroy mission, aimed at the\n"\
-"Gatekeeper, whose foul offspring is\n"\
-"cascading to Earth.  Yeah, he's bad. But\n"\
-"you know who's worse!\n"\
-"\n"\
-"Grinning evilly, you check your gear, and\n"\
-"get ready to give the bastard a little Hell\n"\
-"of your own making!"
+export const P3TEXT :string =
+"You've bashed and battered your way into\n" +
+"the heart of the devil-hive.  Time for a\n" +
+"Search-and-Destroy mission, aimed at the\n" +
+"Gatekeeper, whose foul offspring is\n" +
+"cascading to Earth.  Yeah, he's bad. But\n" +
+"you know who's worse!\n" +
+"\n" +
+"Grinning evilly, you check your gear, and\n" +
+"get ready to give the bastard a little Hell\n" +
+"of your own making!";
 
 // after map 30
 
-#define P4TEXT \
-"The Gatekeeper's evil face is splattered\n"\
-"all over the place.  As its tattered corpse\n"\
-"collapses, an inverted Gate forms and\n"\
-"sucks down the shards of the last\n"\
-"prototype Accelerator, not to mention the\n"\
-"few remaining demons.  You're done. Hell\n"\
-"has gone back to pounding bad dead folks \n"\
-"instead of good live ones.  Remember to\n"\
-"tell your grandkids to put a rocket\n"\
-"launcher in your coffin. If you go to Hell\n"\
-"when you die, you'll need it for some\n"\
-"final cleaning-up ..."
+export const P4TEXT :string =
+"The Gatekeeper's evil face is splattered\n" +
+"all over the place.  As its tattered corpse\n" +
+"collapses, an inverted Gate forms and\n" +
+"sucks down the shards of the last\n" +
+"prototype Accelerator, not to mention the\n" +
+"few remaining demons.  You're done. Hell\n" +
+"has gone back to pounding bad dead folks \n" +
+"instead of good live ones.  Remember to\n" +
+"tell your grandkids to put a rocket\n" +
+"launcher in your coffin. If you go to Hell\n" +
+"when you die, you'll need it for some\n" +
+"final cleaning-up ...";
 
 // before map 31
 
-#define P5TEXT \
-"You've found the second-hardest level we\n"\
-"got. Hope you have a saved game a level or\n"\
-"two previous.  If not, be prepared to die\n"\
-"aplenty. For master marines only."
+export const P5TEXT :string =
+"You've found the second-hardest level we\n" +
+"got. Hope you have a saved game a level or\n" +
+"two previous.  If not, be prepared to die\n" +
+"aplenty. For master marines only.";
 
 // before map 32
 
-#define P6TEXT \
-"Betcha wondered just what WAS the hardest\n"\
-"level we had ready for ya?  Now you know.\n"\
-"No one gets out alive."
+export const P6TEXT :string =
+"Betcha wondered just what WAS the hardest\n" +
+"level we had ready for ya?  Now you know.\n" +
+"No one gets out alive.";
 
 
-#define T1TEXT \
-"You've fought your way out of the infested\n"\
-"experimental labs.   It seems that UAC has\n"\
-"once again gulped it down.  With their\n"\
-"high turnover, it must be hard for poor\n"\
-"old UAC to buy corporate health insurance\n"\
-"nowadays..\n"\
-"\n"\
-"Ahead lies the military complex, now\n"\
-"swarming with diseased horrors hot to get\n"\
-"their teeth into you. With luck, the\n"\
-"complex still has some warlike ordnance\n"\
-"laying around."
+export const T1TEXT :string =
+"You've fought your way out of the infested\n" +
+"experimental labs.   It seems that UAC has\n" +
+"once again gulped it down.  With their\n" +
+"high turnover, it must be hard for poor\n" +
+"old UAC to buy corporate health insurance\n" +
+"nowadays..\n" +
+"\n" +
+"Ahead lies the military complex, now\n" +
+"swarming with diseased horrors hot to get\n" +
+"their teeth into you. With luck, the\n" +
+"complex still has some warlike ordnance\n" +
+"laying around.";
 
 
-#define T2TEXT \
-"You hear the grinding of heavy machinery\n"\
-"ahead.  You sure hope they're not stamping\n"\
-"out new hellspawn, but you're ready to\n"\
-"ream out a whole herd if you have to.\n"\
-"They might be planning a blood feast, but\n"\
-"you feel about as mean as two thousand\n"\
-"maniacs packed into one mad killer.\n"\
-"\n"\
-"You don't plan to go down easy."
+export const T2TEXT :string =
+"You hear the grinding of heavy machinery\n" +
+"ahead.  You sure hope they're not stamping\n" +
+"out new hellspawn, but you're ready to\n" +
+"ream out a whole herd if you have to.\n" +
+"They might be planning a blood feast, but\n" +
+"you feel about as mean as two thousand\n" +
+"maniacs packed into one mad killer.\n" +
+"\n" +
+"You don't plan to go down easy.";
 
 
-#define T3TEXT \
-"The vista opening ahead looks real damn\n"\
-"familiar. Smells familiar, too -- like\n"\
-"fried excrement. You didn't like this\n"\
-"place before, and you sure as hell ain't\n"\
-"planning to like it now. The more you\n"\
-"brood on it, the madder you get.\n"\
-"Hefting your gun, an evil grin trickles\n"\
-"onto your face. Time to take some names."
+export const T3TEXT :string =
+"The vista opening ahead looks real damn\n" +
+"familiar. Smells familiar, too -- like\n" +
+"fried excrement. You didn't like this\n" +
+"place before, and you sure as hell ain't\n" +
+"planning to like it now. The more you\n" +
+"brood on it, the madder you get.\n" +
+"Hefting your gun, an evil grin trickles\n" +
+"onto your face. Time to take some names.";
 
-#define T4TEXT \
-"Suddenly, all is silent, from one horizon\n"\
-"to the other. The agonizing echo of Hell\n"\
-"fades away, the nightmare sky turns to\n"\
-"blue, the heaps of monster corpses start \n"\
-"to evaporate along with the evil stench \n"\
-"that filled the air. Jeeze, maybe you've\n"\
-"done it. Have you really won?\n"\
-"\n"\
-"Something rumbles in the distance.\n"\
-"A blue light begins to glow inside the\n"\
-"ruined skull of the demon-spitter."
-
-
-#define T5TEXT \
-"What now? Looks totally different. Kind\n"\
-"of like King Tut's condo. Well,\n"\
-"whatever's here can't be any worse\n"\
-"than usual. Can it?  Or maybe it's best\n"\
-"to let sleeping gods lie.."
+export const T4TEXT :string =
+"Suddenly, all is silent, from one horizon\n" +
+"to the other. The agonizing echo of Hell\n" +
+"fades away, the nightmare sky turns to\n" +
+"blue, the heaps of monster corpses start \n" +
+"to evaporate along with the evil stench \n" +
+"that filled the air. Jeeze, maybe you've\n" +
+"done it. Have you really won?\n" +
+"\n" +
+"Something rumbles in the distance.\n" +
+"A blue light begins to glow inside the\n" +
+"ruined skull of the demon-spitter.";
 
 
-#define T6TEXT \
-"Time for a vacation. You've burst the\n"\
-"bowels of hell and by golly you're ready\n"\
-"for a break. You mutter to yourself,\n"\
-"Maybe someone else can kick Hell's ass\n"\
-"next time around. Ahead lies a quiet town,\n"\
-"with peaceful flowing water, quaint\n"\
-"buildings, and presumably no Hellspawn.\n"\
-"\n"\
-"As you step off the transport, you hear\n"\
-"the stomp of a cyberdemon's iron shoe."
+export const T5TEXT :string =
+"What now? Looks totally different. Kind\n" +
+"of like King Tut's condo. Well,\n" +
+"whatever's here can't be any worse\n" +
+"than usual. Can it?  Or maybe it's best\n" +
+"to let sleeping gods lie..";
+
+
+export const T6TEXT :string =
+"Time for a vacation. You've burst the\n" +
+"bowels of hell and by golly you're ready\n" +
+"for a break. You mutter to yourself,\n" +
+"Maybe someone else can kick Hell's ass\n" +
+"next time around. Ahead lies a quiet town,\n" +
+"with peaceful flowing water, quaint\n" +
+"buildings, and presumably no Hellspawn.\n" +
+"\n" +
+"As you step off the transport, you hear\n" +
+"the stomp of a cyberdemon's iron shoe.";
 
 
 
 //
 // Character cast strings F_FINALE.C
 //
-#define CC_ZOMBIE	"ZOMBIEMAN"
-#define CC_SHOTGUN	"SHOTGUN GUY"
-#define CC_HEAVY	"HEAVY WEAPON DUDE"
-#define CC_IMP	"IMP"
-#define CC_DEMON	"DEMON"
-#define CC_LOST	"LOST SOUL"
-#define CC_CACO	"CACODEMON"
-#define CC_HELL	"HELL KNIGHT"
-#define CC_BARON	"BARON OF HELL"
-#define CC_ARACH	"ARACHNOTRON"
-#define CC_PAIN	"PAIN ELEMENTAL"
-#define CC_REVEN	"REVENANT"
-#define CC_MANCU	"MANCUBUS"
-#define CC_ARCH	"ARCH-VILE"
-#define CC_SPIDER	"THE SPIDER MASTERMIND"
-#define CC_CYBER	"THE CYBERDEMON"
-#define CC_HERO	"OUR HERO"
+export const CC_ZOMBIE	:string = "ZOMBIEMAN";
+export const CC_SHOTGUN	:string = "SHOTGUN GUY";
+export const CC_HEAVY	  :string = "HEAVY WEAPON DUDE";
+export const CC_IMP	    :string = "IMP";
+export const CC_DEMON	  :string = "DEMON";
+export const CC_LOST	  :string = "LOST SOUL";
+export const CC_CACO	  :string = "CACODEMON";
+export const CC_HELL	  :string = "HELL KNIGHT";
+export const CC_BARON	  :string = "BARON OF HELL";
+export const CC_ARACH	  :string = "ARACHNOTRON";
+export const CC_PAIN	  :string = "PAIN ELEMENTAL";
+export const CC_REVEN	  :string = "REVENANT";
+export const CC_MANCU	  :string = "MANCUBUS";
+export const CC_ARCH	  :string = "ARCH-VILE";
+export const CC_SPIDER	:string = "THE SPIDER MASTERMIND";
+export const CC_CYBER	  :string = "THE CYBERDEMON";
+export const CC_HERO	  :string = "OUR HERO";
 
-
-#endif
+}
 //-----------------------------------------------------------------------------
 //
 // $Log:$
