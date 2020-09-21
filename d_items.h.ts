@@ -20,31 +20,31 @@
 //-----------------------------------------------------------------------------
 
 
-#ifndef __D_ITEMS__
-#define __D_ITEMS__
+if (typeof __D_ITEMS__ == "undefined"){
+export const __D_ITEMS__ :boolean = true;
 
-#include "doomdef.h"
+import "doomdef.h.ts";
 
-#ifdef __GNUG__
+/*if (typeof __GNUG__ != "undefined") {
 #pragma interface
-#endif
+}*/
 
 
 // Weapon info: sprite frames, ammunition use.
-typedef struct
+export interface weaponinfo_t
 {
-    ammotype_t	ammo;
-    int		upstate;
-    int		downstate;
-    int		readystate;
-    int		atkstate;
-    int		flashstate;
+    ammo        :ammotype_t;
+    upstate     :bigint;
+    downstate   :bigint;
+    readystate  :bigint;
+    atkstate    :bigint;
+    flashstate  :bigint;
 
-} weaponinfo_t;
+}
 
-extern  weaponinfo_t    weaponinfo[NUMWEAPONS];
+globalThis. weaponinfo  :weaponinfo_t[];      //length = NUMWEAPONS
 
-#endif
+}
 //-----------------------------------------------------------------------------
 //
 // $Log:$
