@@ -41,41 +41,41 @@ const FGCOLOR :bigint = 8;
 #endif*/
 
 
-import "doomdef.h.ts"
-import "doomstat.h"
+import "doomdef.h.ts";
+import "doomstat.h";
 
-import "dstrings.h"
-import "sounds.h"
-
-
-import "z_zone.h"
-import "w_wad.h"
-import "s_sound.h"
-import "v_video.h"
-
-import "f_finale.h"
-import "f_wipe.h"
-
-import "m_argv.h"
-import "m_misc.h"
-import "m_menu.h"
-
-import "i_system.h"
-import "i_sound.h"
-import "i_video.h"
-
-import "g_game.h"
-
-import "hu_stuff.h"
-import "wi_stuff.h"
-import "st_stuff.h"
-import "am_map.h"
-
-import "p_setup.h"
-import "r_local.h"
+import "dstrings.h";
+import "sounds.h";
 
 
-import "d_main.h"
+import "z_zone.h";
+import "w_wad.h";
+import "s_sound.h";
+import "v_video.h";
+
+import "f_finale.h";
+import "f_wipe.h";
+
+import "m_argv.h";
+import "m_misc.h";
+import "m_menu.h";
+
+import "i_system.h";
+import "i_sound.h";
+import "i_video.h";
+
+import "g_game.h";
+
+import "hu_stuff.h";
+import "wi_stuff.h";
+import "st_stuff.h";
+import "am_map.h";
+
+import "p_setup.h";
+import "r_local.h";
+
+
+import "d_main.h";
 
 //
 // D-DoomLoop()
@@ -86,20 +86,20 @@ import "d_main.h"
 //  calls all ?_Responder, ?_Ticker, and ?_Drawer,
 //  calls I_GetTime, I_StartFrame, and I_StartTic
 //
-void D_DoomLoop (void);
+declare function D_DoomLoop () :void;
 
 
-char*        wadfiles[MAXWADFILES];
+wadfiles :number[];    //char* wadfiles[MAXWADFILES]
 
 
-boolean        devparm;    // started game with -devparm
-boolean         nomonsters;    // checkparm of -nomonsters
-boolean         respawnparm;    // checkparm of -respawn
-boolean         fastparm;    // checkparm of -fast
+var devparm     :boolean;    // started game with -devparm
+var nomonsters  :boolean;    // checkparm of -nomonsters
+var respawnparm :boolean;    // checkparm of -respawn
+var fastparm    :boolean;    // checkparm of -fast
 
-boolean         drone;
+var drone       :boolean;
 
-boolean        singletics = false; // debug flag to cancel adaptiveness
+var singletics  :boolean = false; // debug flag to cancel adaptiveness
 
 
 
@@ -107,16 +107,16 @@ boolean        singletics = false; // debug flag to cancel adaptiveness
 //extern  int    sfxVolume;
 //extern  int    musicVolume;
 
-extern  boolean    inhelpscreens;
+globalThis. inhelpscreens :boolean;
 
-skill_t        startskill;
-int             startepisode;
-int        startmap;
-boolean        autostart;
+var startskill      :skill_t;
+var startepisode    :bigint;
+var startmap        :bigint;
+var autostart       :boolean;
 
-FILE*        debugfile;
+debugfile       :FILE;    //FILE*
 
-boolean        advancedemo;
+advancedemo     :boolean;
 
 
 
