@@ -20,15 +20,15 @@
 //-----------------------------------------------------------------------------
 
 
-#ifndef __D_NET__
-#define __D_NET__
+//#ifndef __D_NET__
+//#define __D_NET__
 
-#include "d_player.h"
+import "d_player.h.ts";
 
 
-#ifdef __GNUG__
-#pragma interface
-#endif
+//#ifdef __GNUG__
+//#pragma interface
+//#endif
 
 
 //
@@ -39,39 +39,39 @@
 //  be transmitted.
 //
 
-#define DOOMCOM_ID		0x12345678l
+export const DOOMCOM_ID	:bigint = 0x12345678l;
 
 // Max computers/players in a game.
-#define MAXNETNODES		8
+export const MAXNETNODES = 8;
 
 
 // Networking and tick handling related.
-#define BACKUPTICS		12
+export const BACKUPTICS = 12;
 
-typedef enum
+enum command_t
 {
-    CMD_SEND	= 1,
-    CMD_GET	= 2
+    CMD_SEND = 1,
+    CMD_GET = 2
 
-} command_t;
+}
 
 
 //
 // Network packet data.
 //
-typedef struct
+interface doomdata_t
 {
     // High bit is retransmit request.
-    unsigned		checksum;
+    checksum        :number;                          //unsigned
     // Only valid if NCMD_RETRANSMIT.
-    byte		retransmitfrom;
+    retransmitfrom  :char;                            //actually byte
     
-    byte		starttic;
-    byte		player;
-    byte		numtics;
-    ticcmd_t		cmds[BACKUPTICS];
+    starttic        :char;
+    player          :char;
+    numtics         :char;
+    cmds            :ticcmd_r[];                      //[BACKUPTICS]
 
-} doomdata_t;
+}
 
 
 
