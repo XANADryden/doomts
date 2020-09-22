@@ -17,7 +17,7 @@
 // $Log:$
 //
 // DESCRIPTION:
-//	System specific interface stuff.
+//  System specific interface stuff.
 //
 //-----------------------------------------------------------------------------
 
@@ -36,7 +36,7 @@ import "d_event.h"
 export const MAXWADFILES :bigint = 20;
 globalThis.wadfiles :number[]; //char*[MAXWADFILES]
 
-function D_AddFile (file :char) :void;
+declare export function D_AddFile (file :char) :void;
 
 
 
@@ -46,19 +46,19 @@ function D_AddFile (file :char) :void;
 // calls all startup code, parses command line options.
 // If not overrided by user input, calls N_AdvanceDemo.
 //
-void D_DoomMain (void);
+declare export function D_DoomMain () :void;
 
 // Called by IO functions when input is detected.
-void D_PostEvent (event_t* ev);
+declare export function D_PostEvent (ev :event_t) :void;
 
 	
 
 //
 // BASE LEVEL
 //
-void D_PageTicker (void);
-void D_PageDrawer (void);
-void D_AdvanceDemo (void);
-void D_StartTitle (void);
+declare export function D_PageTicker () :void;
+declare export function D_PageDrawer () :void;
+declare export function D_AdvanceDemo () :void;
+declare export function D_StartTitle () :void;
 
-#endif
+}
