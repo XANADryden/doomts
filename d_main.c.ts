@@ -24,7 +24,7 @@
 //
 //-----------------------------------------------------------------------------
 
-import * as globalThis from "d_main.c.ts"
+//import * as globalThis from "d_main.c.ts"
 
 import "c_types.ts";
 
@@ -193,23 +193,35 @@ globalThis.setsizeneeded :boolean;
 globalThis.showMessages  :bigint;
 declare function R_ExecuteSetViewSize () :void;
 
-//this has static vars, and will be exported, so they can be imported by this file like 'import * as globalThis from "d_main.c.ts"'
+
 function D_Display () :void
 {
-    export  viewactivestate     :boolean = false;
-    export  menuactivestate     :boolean = false;
-    export  inhelpscreensstate  :boolean = false;
-    export  fullscreen          :boolean = false;
-    export  oldgamestate        :gamestate_t = -1;
-    export  borderdrawcount     :bigint;
-    import * as globalThis from "d_main.c.ts";
-    nowtime            :bigint;
-    tics               :bigint;
-    wipestart          :bigint;
-    y                  :bigint;
-    done               :boolean;
-    wipe               :boolean;
-    redrawsbar         :boolean;
+    // The four booleans and two other vars are supposed to be static, meaning they aren't ever deleted from memory, but they are only accesible in this scope.
+    // So, I'm making a function to access them and moving it to the global scope so that js doesn't delete them when this scope is closed.
+    
+    var  viewactivestate     :boolean = false;
+    var  menuactivestate     :boolean = false;
+    var  inhelpscreensstate  :boolean = false;
+    var  fullscreen          :boolean = false;
+    var  oldgamestate        :gamestate_t = -1;
+    var  borderdrawcount     :bigint;
+    if(typeof(globalThis.D_Display == "undefined")){
+        globalThis.D_Display = function () :void {
+            console.log(viewactivestate);
+            console.log(menuactivestate);
+            console.log(inhelpscreensstate);
+            console.log(fullscreen);
+            console.log(oldgamestate);
+            console.log(borderdrawcount);
+        }
+    }
+    var nowtime            :bigint;
+    var tics               :bigint;
+    var wipestart          :bigint;
+    var y                  :bigint;
+    var done               :boolean;
+    var wipe               :boolean;
+    var redrawsbar         :boolean;
     
     if (nodrawers)
     return;                    // for comparative timing / profiling
