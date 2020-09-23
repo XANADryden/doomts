@@ -92,7 +92,7 @@ import "d_main.h.ts";
 declare function D_DoomLoop () :void;
 
 
-wadfiles :u_char[];    //char* wadfiles[MAXWADFILES]
+wadfiles :Int8Array;    //char* wadfiles[MAXWADFILES]
 
 
 var devparm     :boolean;    // started game with -devparm
@@ -123,7 +123,7 @@ advancedemo     :boolean;
 
 
 
-//all three have a length of 1024
+//all three have a length of 1024     char|byte (*?) [1024] (i don't remember which)
 wadfile     :u_char[];          // primary wad file
 mapdir      :u_char[];          // directory of development maps
 basedefault :u_char[];          // default file
