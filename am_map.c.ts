@@ -750,46 +750,46 @@ AM_Responder
         am_map.plr.message = am_map.grid ? AMSTR_GRIDON : AMSTR_GRIDOFF;
         break;
       case AM_MARKKEY:
-        sprintf(am_map.buffer, "%s %d", AMSTR_MARKEDSPOT, am_map.markpointnum);//:::CONTINUE:::
-        plr->message = buffer;
+        sprintf(am_map.buffer, "%s %d", AMSTR_MARKEDSPOT, am_map.markpointnum);
+        am_map.plr.message = am_map.buffer;
         AM_addMark();
         break;
       case AM_CLEARMARKKEY:
         AM_clearMarks();
-        plr->message = AMSTR_MARKSCLEARED;
+        am_map.plr.message = AMSTR_MARKSCLEARED;
         break;
       default:
-        cheatstate=0;
+        am_map.cheatstate=0;
         rc = false;
     }
-    if (!deathmatch && cht_CheckCheat(&cheat_amap, ev->data1))
+    if (!deathmatch && cht_CheckCheat(am_map.cheat_amap, ev.data1))
     {
         rc = false;
-        cheating = (cheating+1) % 3;
+        am_map.cheating = (am_map.cheating+1) % 3;
     }
     }
 
-    else if (ev->type == ev_keyup)
+    else if (ev.type == ev_keyup)
     {
     rc = false;
-    switch (ev->data1)
+    switch (ev.data1)
     {
       case AM_PANRIGHTKEY:
-        if (!followplayer) m_paninc.x = 0;
+        if (!am_map.followplayer) am_map.m_paninc.x = 0;
         break;
       case AM_PANLEFTKEY:
-        if (!followplayer) m_paninc.x = 0;
+        if (!am_map.followplayer) am_map.m_paninc.x = 0;
         break;
       case AM_PANUPKEY:
-        if (!followplayer) m_paninc.y = 0;
+        if (!am_map.followplayer) am_map.m_paninc.y = 0;
         break;
       case AM_PANDOWNKEY:
-        if (!followplayer) m_paninc.y = 0;
+        if (!am_map.followplayer) am_map.m_paninc.y = 0;
         break;
       case AM_ZOOMOUTKEY:
       case AM_ZOOMINKEY:
-        mtof_zoommul = FRACUNIT;
-        ftom_zoommul = FRACUNIT;
+        am_map.mtof_zoommul = FRACUNIT;
+        am_map.ftom_zoommul = FRACUNIT;
         break;
     }
     }
@@ -802,7 +802,7 @@ AM_Responder
 //
 // Zooming
 //
-void AM_changeWindowScale(void)
+function AM_changeWindowScale()//:::CONTINUE:::
 {
 
     // Change the scaling multipliers
