@@ -19,7 +19,14 @@ import * as r_state from "r_state.h.ts";
 // Data.
 import * as dstrings from "dstrings.h.ts";
 
-import * as am_map from "am_map.h.ts";
+//import * as am_map from "am_map.h.ts";
+import {AM_MSGHEADER} from "am_map.h";
+import {AM_MSGENTERED} from "am_map.h";
+import {AM_MSGEXITED} from "am_map.h";
+import {AM_Responder} from "am_map.h"
+import {AM_Ticker} from "am_map.h";
+import {AM_Drawer} from "am_map.h";
+import {AM_Stop} from "am_map.h";
 
 
 // For use if I do walls with outsides/insides
