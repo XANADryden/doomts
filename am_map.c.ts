@@ -849,19 +849,19 @@ function AM_doFollowPlayer(): void
 //
 //
 //
-function AM_updateLightLev(): void //:::CONTINUE:::
+function AM_updateLightLev(): void
 {
     am_map.nexttic = 0;                        // static nexttic = 0;
     //static int litelevels[] = { 0, 3, 5, 6, 6, 7, 7, 7 };
-    static int litelevels[] = { 0, 4, 7, 10, 12, 14, 15, 15 };  //static int litelevels[] = { 0, 4, 7, 10, 12, 13, 15, 15 };
-    static int litelevelscnt = 0;
+    am_map.litelevels[] = { 0, 4, 7, 10, 12, 14, 15, 15 };  //static int litelevels[] = { 0, 4, 7, 10, 12, 13, 15, 15 };
+    am_map.litelevelscnt = 0;
    
     // Change light level
-    if (amclock>nexttic)
+    if (am_map.amclock>am_map.nexttic)
     {
-    lightlev = litelevels[litelevelscnt++];
-    if (litelevelscnt == sizeof(litelevels)/sizeof(int)) litelevelscnt = 0;
-    nexttic = amclock + 6 - (amclock % 6);
+    am_map.lightlev = am_map.litelevels[am_map.litelevelscnt++];
+    if (am_map.litelevelscnt == sizeof(am_map.litelevels)/sizeof(int)) am_map.litelevelscnt = 0;
+    am_map.nexttic = am_map.amclock + 6 - (am_map.amclock % 6);
     }
 
 }
@@ -870,23 +870,23 @@ function AM_updateLightLev(): void //:::CONTINUE:::
 //
 // Updates on Game Tick
 //
-void AM_Ticker (void)
+function AM_Ticker (): void
 {
 
     if (!automapactive)
     return;
 
-    amclock++;
+    am_map.amclock++;
 
-    if (followplayer)
+    if (am_map.followplayer)
     AM_doFollowPlayer();
 
     // Change the zoom if necessary
-    if (ftom_zoommul != FRACUNIT)
+    if (am_map.ftom_zoommul != FRACUNIT)
     AM_changeWindowScale();
 
     // Change x,y location
-    if (m_paninc.x || m_paninc.y)
+    if (am_map.m_paninc.x || am_map.m_paninc.y)
     AM_changeWindowLoc();
 
     // Update light level
@@ -898,9 +898,9 @@ void AM_Ticker (void)
 //
 // Clear automap frame buffer.
 //
-void AM_clearFB(int color)
+function AM_clearFB(color: number): void
 {
-    memset(fb, color, f_w*f_h);
+    memset(am_map.fb, color, am_map.f_w*am_map.f_h);
 }
 
 
@@ -911,71 +911,74 @@ void AM_clearFB(int color)
 // faster reject and precalculated slopes.  If the speed is needed,
 // use a hash algorithm to handle  the common cases.
 //
-boolean
+function
 AM_clipMline
-( mline_t*    ml,
-  fline_t*    fl )
+( ml:   mline_t,
+  fl:   fline_t ): boolean
 {
-    enum
+    enum side
     {
-    LEFT    =1,
-    RIGHT    =2,
-    BOTTOM    =4,
-    TOP    =8
+        LEFT    =1,
+        RIGHT   =2,
+        BOTTOM  =4,
+        TOP     =8
     };
     
+    //three registers
     register    outcode1 = 0;
     register    outcode2 = 0;
     register    outside;
     
-    fpoint_t    tmp;
-    int        dx;
-    int        dy;
+    var tmp:    fpoint_t,
+    dx:     number,
+    dy:     number;
 
     
-#define DOOUTCODE(oc, mx, my) \
-    (oc) = 0; \
-    if ((my) < 0) (oc) |= TOP; \
-    else if ((my) >= f_h) (oc) |= BOTTOM; \
-    if ((mx) < 0) (oc) |= LEFT; \
-    else if ((mx) >= f_w) (oc) |= RIGHT;
+    let DOOUTCODE = (oc: any, mx: number, my: number): number => {
+        oc = 0; 
+        if (my < 0) oc |= side.TOP; 
+        else if (my >= am_map.f_h) oc |= side.BOTTOM; 
+        if (mx < 0) oc |= side.LEFT; 
+        else if (mx >= am_map.f_w) oc |= side.RIGHT;
+        return oc;
+    };
 
     
     // do trivial rejects and outcodes
-    if (ml->a.y > m_y2)
-    outcode1 = TOP;
-    else if (ml->a.y < m_y)
-    outcode1 = BOTTOM;
+    if (ml.a.y > am_map.m_y2)
+    outcode1 = side.TOP;
+    else if (ml.a.y < am_map.m_y)
+    outcode1 = side.BOTTOM;
 
-    if (ml->b.y > m_y2)
-    outcode2 = TOP;
-    else if (ml->b.y < m_y)
-    outcode2 = BOTTOM;
+    if (ml.b.y > am_map.m_y2)
+    outcode2 = side.TOP;
+    else if (ml.b.y < am_map.m_y)
+    outcode2 = side.BOTTOM;
     
     if (outcode1 & outcode2)
     return false; // trivially outside
 
-    if (ml->a.x < m_x)
-    outcode1 |= LEFT;
-    else if (ml->a.x > m_x2)
-    outcode1 |= RIGHT;
+    if (ml.a.x < am_map.m_x)
+    outcode1 |= side.LEFT;
+    else if (ml.a.x > am_map.m_x2)
+    outcode1 |= side.RIGHT;
     
-    if (ml->b.x < m_x)
-    outcode2 |= LEFT;
-    else if (ml->b.x > m_x2)
-    outcode2 |= RIGHT;
+    if (ml.b.x < am_map.m_x)
+    outcode2 |= side.LEFT;
+    else if (ml.b.x > am_map.m_x2)
+    outcode2 |= side.RIGHT;
     
     if (outcode1 & outcode2)
     return false; // trivially outside
 
     // transform to frame-buffer coordinates.
-    fl->a.x = CXMTOF(ml->a.x);
-    fl->a.y = CYMTOF(ml->a.y);
-    fl->b.x = CXMTOF(ml->b.x);
-    fl->b.y = CYMTOF(ml->b.y);
+    fl.a.x = CXMTOF(ml.a.x);
+    fl.a.y = CYMTOF(ml.a.y);
+    fl.b.x = CXMTOF(ml.b.x);
+    fl.b.y = CYMTOF(ml.b.y);
 
-    DOOUTCODE(outcode1, fl->a.x, fl->a.y);
-    DOOUTCODE(outcode2, fl->b.x, fl->b.y);
+    outcode1 = DOOUTCODE(outcode1, fl.a.x, fl.a.y);
+    outcode2 = DOOUTCODE(outcode2, fl.b.x, fl.b.y);
 
     if (outcode1 & outcode2)
     return false;
@@ -990,44 +993,44 @@ AM_clipMline
         outside = outcode2;
     
     // clip to each side
-    if (outside & TOP)
+    if (outside & side.TOP)
     {
-        dy = fl->a.y - fl->b.y;
-        dx = fl->b.x - fl->a.x;
-        tmp.x = fl->a.x + (dx*(fl->a.y))/dy;
+        dy = fl.a.y - fl.b.y;
+        dx = fl.b.x - fl.a.x;
+        tmp.x = fl.a.x + (dx*(fl.a.y))/dy;
         tmp.y = 0;
     }
-    else if (outside & BOTTOM)
+    else if (outside & side.BOTTOM)
     {
-        dy = fl->a.y - fl->b.y;
-        dx = fl->b.x - fl->a.x;
-        tmp.x = fl->a.x + (dx*(fl->a.y-f_h))/dy;
-        tmp.y = f_h-1;
+        dy = fl.a.y - fl.b.y;
+        dx = fl.b.x - fl.a.x;
+        tmp.x = fl.a.x + (dx*(fl.a.y-am_map.f_h))/dy;
+        tmp.y = am_map.f_h-1;
     }
-    else if (outside & RIGHT)
+    else if (outside & side.RIGHT)
     {
-        dy = fl->b.y - fl->a.y;
-        dx = fl->b.x - fl->a.x;
-        tmp.y = fl->a.y + (dy*(f_w-1 - fl->a.x))/dx;
-        tmp.x = f_w-1;
+        dy = fl.b.y - fl.a.y;
+        dx = fl.b.x - fl.a.x;
+        tmp.y = fl.a.y + (dy*(am_map.f_w-1 - fl.a.x))/dx;
+        tmp.x = am_map.f_w-1;
     }
-    else if (outside & LEFT)
+    else if (outside & side.LEFT)
     {
-        dy = fl->b.y - fl->a.y;
-        dx = fl->b.x - fl->a.x;
-        tmp.y = fl->a.y + (dy*(-fl->a.x))/dx;
+        dy = fl.b.y - fl.a.y;
+        dx = fl.b.x - fl.a.x;
+        tmp.y = fl.a.y + (dy*(-fl.a.x))/dx;
         tmp.x = 0;
     }
 
     if (outside == outcode1)
     {
-        fl->a = tmp;
-        DOOUTCODE(outcode1, fl->a.x, fl->a.y);
+        fl.a = tmp;
+        outcode1 = DOOUTCODE(outcode1, fl.a.x, fl.a.y);
     }
     else
     {
-        fl->b = tmp;
-        DOOUTCODE(outcode2, fl->b.x, fl->b.y);
+        fl.b = tmp;
+        outcode2 = DOOUTCODE(outcode2, fl.b.x, fl.b.y);
     }
     
     if (outcode1 & outcode2)
@@ -1036,7 +1039,7 @@ AM_clipMline
 
     return true;
 }
-#undef DOOUTCODE
+
 
 
 //
@@ -1057,7 +1060,7 @@ AM_drawFline
     register int ay;
     register int d;
     
-    static fuck = 0;
+    static fuck = 0;//:::CONTINUE:::
 
     // For debugging only
     if (      fl->a.x < 0 || fl->a.x >= f_w
