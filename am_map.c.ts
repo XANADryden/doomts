@@ -276,6 +276,8 @@ interface am_map_t {
     nexttic?:        number;     // Literally just said `static nexttic = 0;`. wtf
     litelevels?:     number[];   // static int litelevels[] = { 0, 4, 7, 10, 12, 13, 15, 15 };
     litelevelscnt?:  number;
+    
+    fuck?:  number;             // Yes it exists
 }
 
 var am_map :am_map_t = {
@@ -1060,7 +1062,7 @@ AM_drawFline
     register int ay;
     register int d;
     
-    static fuck = 0;//:::CONTINUE:::
+    am_map.fuck = 0;
 
     // For debugging only
     if (      fl->a.x < 0 || fl->a.x >= f_w
