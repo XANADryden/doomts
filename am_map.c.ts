@@ -1,6 +1,7 @@
 //#include <stdio.h>
 
 import {u_char} from "c_types";
+import {char} from "c_types";
 
 import * as z_zone from "z_zone.h.ts";
 import * as doomdef from "doomdef.h.ts";
@@ -100,11 +101,11 @@ const M_ZOOMIN :number = Math.floor(1.02*FRACUNIT);
 const M_ZOOMOUT :number = Math.floor(FRACUNIT/1.02);
 
 // translates between frame-buffer and map distances
-function FTOM(x :number) :number {return(FixedMul(((x)<<16),scale_ftom))}
-function MTOF(x :number) :number {return(FixedMul((x),scale_mtof)>>16)}
+function FTOM(x :number) :number {return(FixedMul(((x)<<16),am_map.scale_ftom))}
+function MTOF(x :number) :number {return(FixedMul((x),am_map.scale_mtof)>>16)}
 // translates between frame-buffer and map coordinates
-function CXMTOF(x :number) :number {return(f_x + MTOF((x)-m_x))}
-function CYMTOF(y :number) :number {return(f_y + (f_h - MTOF((y)-m_y)))}
+function CXMTOF(x :number) :number {return(am_map.f_x + MTOF((x)-am_map.m_x))}
+function CYMTOF(y :number) :number {return(am_map.f_y + (am_map.f_h - MTOF((y)-am_map.m_y)))}
 
 // the following is crap
 const LINE_NEVERSEE = ML_DONTDRAW;
@@ -157,7 +158,7 @@ var player_arrow:mline_t[] = [
 //#undef R
 const NUMPLYRLINES = (sizeof(player_arrow)/sizeof(mline_t));
 
-//:::CONTINUE:::
+
 //#define R ((8*PLAYERRADIUS)/7)
 var cheat_player_arrow:mline_t[] = [
     {a:{ x:-R+R/8, y:0 }, b:{ x:R, y:0 } }, // -----
@@ -216,7 +217,7 @@ interface am_map_t {
     fb?:            number;
     amclock?:       number;
     
-    m_panic?:       mpoint_t;
+    m_paninc?:       mpoint_t;
     mtof_zoommul?:  fixed_t;
     ftom_zoommul?:  fixed_t;
     
@@ -246,7 +247,7 @@ interface am_map_t {
     
     f_oldloc?:   mpoint_t;
 
-    scale_mtof?: scale_t;
+    scale_mtof?: fixed_t;
     scale_ftom?: fixed_t;
     
     plr?:        player_t;
@@ -259,9 +260,18 @@ interface am_map_t {
 
     cheat_amap_seq?: u_char[];
     
-    cheat_amap?:     cheatseq_t;
+    cheat_amap?: cheatseq_t;
 
-    stopped?:        boolean;
+    stopped?:    boolean;
+    
+    st_notify?: event_t;
+    
+    lastlevel?: number;
+    lastepisode?:number;
+    
+    cheatstate?:number;
+    bigstate?:  number;
+    buffer?  :[char, char, char, char, char, char, char, char, char, char, char, char, char, char, char, char, char, char, char, char];
 }
 
 var am_map :am_map_t = {
@@ -406,13 +416,12 @@ function AM_saveScaleAndLoc(): void
 //
 //
 //
-//:::CONTINUE:::
 function AM_restoreScaleAndLoc(): void
 {
 
     am_map.m_w = am_map.old_m_w;
     am_map.m_h = am_map.old_m_h;
-    if (!followplayer)
+    if (!am_map.followplayer)
     {
     am_map.m_x = am_map.old_m_x;
     am_map.m_y = am_map.old_m_y;
@@ -422,20 +431,20 @@ function AM_restoreScaleAndLoc(): void
     }
     am_map.m_x2 = am_map.m_x + am_map.m_w;
     am_map.m_y2 = am_map.m_y + am_map.m_h;
-
+    
     // Change the scaling multipliers
-    am_map.scale_mtof = FixedDiv(am_map.f_w<<FRACBITS, am_map.m_w);
+    am_map.scale_mtof = FixedDiv(am_map.f_w<<FRACBITS, am_map.m_w);   // FixedDiv
     am_map.scale_ftom = FixedDiv(FRACUNIT, am_map.scale_mtof);
 }
 
 //
 // adds a marker at the current location
 //
-void AM_addMark(void)
+function AM_addMark(): void
 {
-    markpoints[markpointnum].x = m_x + m_w/2;
-    markpoints[markpointnum].y = m_y + m_h/2;
-    markpointnum = (markpointnum + 1) % AM_NUMMARKPOINTS;
+    am_map.markpoints[am_map.markpointnum].x = am_map.m_x + am_map.m_w/2;
+    am_map.markpoints[am_map.markpointnum].y = am_map.m_y + am_map.m_h/2;
+    am_map.markpointnum = (am_map.markpointnum + 1) % AM_NUMMARKPOINTS;
 
 }
 
@@ -443,39 +452,40 @@ void AM_addMark(void)
 // Determines bounding box of all vertices,
 // sets global variables controlling zoom range.
 //
-void AM_findMinMaxBoundaries(void)
+function AM_findMinMaxBoundaries(): void
 {
-    int i;
-    fixed_t a;
-    fixed_t b;
+    var
+    i: number,
+    a: fixed_t,
+    b: fixed_t;
 
-    min_x = min_y =  MAXINT;
-    max_x = max_y = -MAXINT;
+    am_map.min_x = am_map.min_y =  MAXINT;
+    am_map.max_x = am_map.max_y = -MAXINT;
   
     for (i=0;i<numvertexes;i++)
     {
-    if (vertexes[i].x < min_x)
-        min_x = vertexes[i].x;
-    else if (vertexes[i].x > max_x)
-        max_x = vertexes[i].x;
+    if (vertexes[i].x < am_map.min_x)
+        am_map.min_x = vertexes[i].x;
+    else if (vertexes[i].x > am_map.max_x)
+        am_map.max_x = vertexes[i].x;
     
-    if (vertexes[i].y < min_y)
-        min_y = vertexes[i].y;
-    else if (vertexes[i].y > max_y)
-        max_y = vertexes[i].y;
+    if (vertexes[i].y < am_map.min_y)
+        am_map.min_y = vertexes[i].y;
+    else if (vertexes[i].y > am_map.max_y)
+        am_map.max_y = vertexes[i].y;
     }
   
-    max_w = max_x - min_x;
-    max_h = max_y - min_y;
+    am_map.max_w = am_map.max_x - am_map.min_x;
+    am_map.max_h = am_map.max_y - am_map.min_y;
 
-    min_w = 2*PLAYERRADIUS; // const? never changed?
-    min_h = 2*PLAYERRADIUS;
+    am_map.min_w = 2*PLAYERRADIUS; // const? never changed?
+    am_map.min_h = 2*PLAYERRADIUS;
 
-    a = FixedDiv(f_w<<FRACBITS, max_w);
-    b = FixedDiv(f_h<<FRACBITS, max_h);
+    a = FixedDiv(am_map.f_w<<FRACBITS, am_map.max_w);
+    b = FixedDiv(am_map.f_h<<FRACBITS, am_map.max_h);
   
-    min_scale_mtof = a < b ? a : b;
-    max_scale_mtof = FixedDiv(f_h<<FRACBITS, 2*PLAYERRADIUS);
+    am_map.min_scale_mtof = a < b ? a : b;
+    am_map.max_scale_mtof = FixedDiv(am_map.f_h<<FRACBITS, 2*PLAYERRADIUS);
 
 }
 
@@ -483,129 +493,126 @@ void AM_findMinMaxBoundaries(void)
 //
 //
 //
-void AM_changeWindowLoc(void)
+function AM_changeWindowLoc(): void
 {
-    if (m_paninc.x || m_paninc.y)
+    if (am_map.m_paninc.x || am_map.m_paninc.y)
     {
-    followplayer = 0;
-    f_oldloc.x = MAXINT;
+    am_map.followplayer = 0;
+    am_map.f_oldloc.x = MAXINT;
     }
 
-    m_x += m_paninc.x;
-    m_y += m_paninc.y;
+    am_map.m_x += am_map.m_paninc.x;
+    am_map.m_y += am_map.m_paninc.y;
 
-    if (m_x + m_w/2 > max_x)
-    m_x = max_x - m_w/2;
-    else if (m_x + m_w/2 < min_x)
-    m_x = min_x - m_w/2;
+    if (am_map.m_x + am_map.m_w/2 > am_map.max_x)
+    am_map.m_x = am_map.max_x - am_map.m_w/2;
+    else if (am_map.m_x + am_map.m_w/2 < am_map.min_x)
+    am_map.m_x = am_map.min_x - am_map.m_w/2;
   
-    if (m_y + m_h/2 > max_y)
-    m_y = max_y - m_h/2;
-    else if (m_y + m_h/2 < min_y)
-    m_y = min_y - m_h/2;
+    if (am_map.m_y + am_map.m_h/2 > am_map.max_y)
+    am_map.m_y = am_map.max_y - am_map.m_h/2;
+    else if (am_map.m_y + am_map.m_h/2 < am_map.min_y)
+    am_map.m_y = am_map.min_y - am_map.m_h/2;
 
-    m_x2 = m_x + m_w;
-    m_y2 = m_y + m_h;
+    am_map.m_x2 = am_map.m_x + am_map.m_w;
+    am_map.m_y2 = am_map.m_y + am_map.m_h;
 }
 
 
 //
 //
 //
-void AM_initVariables(void)
+function AM_initVariables(): void
 {
-    int pnum;
-    static event_t st_notify = { ev_keyup, AM_MSGENTERED };
+    var pnum: number;
+    
+    am_map.st_notify: event_t = { ev_keyup, AM_MSGENTERED };        //static event_t st_notify = { ev_keyup, AM_MSGENTERED };
 
     automapactive = true;
-    fb = screens[0];
+    am_map.fb = screens[0];
 
-    f_oldloc.x = MAXINT;
-    amclock = 0;
-    lightlev = 0;
+    am_map.f_oldloc.x = MAXINT;
+    am_map.amclock = 0;
+    am_map.lightlev = 0;
 
-    m_paninc.x = m_paninc.y = 0;
-    ftom_zoommul = FRACUNIT;
-    mtof_zoommul = FRACUNIT;
+    am_map.m_paninc.x = am_map.m_paninc.y = 0;
+    am_map.ftom_zoommul = FRACUNIT;
+    am_map.mtof_zoommul = FRACUNIT;
 
-    m_w = FTOM(f_w);
-    m_h = FTOM(f_h);
+    am_map.m_w = FTOM(am_map.f_w);
+    am_map.m_h = FTOM(am_map.f_h);
 
     // find player to center on initially
     if (!playeringame[pnum = consoleplayer])
-    for (pnum=0;pnum<MAXPLAYERS;pnum++)
-        if (playeringame[pnum])
-        break;
-  
-    plr = &players[pnum];
-    m_x = plr->mo->x - m_w/2;
-    m_y = plr->mo->y - m_h/2;
+    for (pnum = 0; pnum < MAXPLAYERS; pnum++)
+        if (playeringame[pnum]) break;
+    
+    
+    am_map.plr = players[pnum];
+    am_map.m_x = am_map.plr.mo.x - am_map.m_w/2;
+    am_map.m_y = am_map.plr.mo.y - am_map.m_h/2;
     AM_changeWindowLoc();
 
     // for saving & restoring
-    old_m_x = m_x;
-    old_m_y = m_y;
-    old_m_w = m_w;
-    old_m_h = m_h;
+    am_map.old_m_x = am_map.m_x;
+    am_map.old_m_y = am_map.m_y;
+    am_map.old_m_w = am_map.m_w;
+    am_map.old_m_h = am_map.m_h;
 
     // inform the status bar of the change
-    ST_Responder(&st_notify);
+    ST_Responder(am_map.st_notify);
 
 }
 
 //
 // 
 //
-void AM_loadPics(void)
+function AM_loadPics(): void
 {
-    int i;
-    char namebuf[9];
+    //var i: number;
+    var namebuf: char[];   //char namebuf[9]
   
-    for (i=0;i<10;i++)
+    for (var i:number=0;i<10;i++)
     {
     sprintf(namebuf, "AMMNUM%d", i);
-    marknums[i] = W_CacheLumpName(namebuf, PU_STATIC);
+    am_map.marknums[i] = W_CacheLumpName(namebuf, PU_STATIC);
     }
 
 }
 
-void AM_unloadPics(void)
+function AM_unloadPics(): void
 {
-    int i;
-  
-    for (i=0;i<10;i++)
-    Z_ChangeTag(marknums[i], PU_CACHE);
+    for (var i:number=0;i<10;i++)
+        Z_ChangeTag(am_map.marknums[i], PU_CACHE);
 
 }
 
-void AM_clearMarks(void)
+function AM_clearMarks(): void
 {
-    int i;
-
-    for (i=0;i<AM_NUMMARKPOINTS;i++)
-    markpoints[i].x = -1; // means empty
-    markpointnum = 0;
+    for (var i:number=0;i<AM_NUMMARKPOINTS;i++)
+        am_map.markpoints[i].x = -1; // means empty
+    am_map.markpointnum = 0;
 }
 
 //
 // should be called at the start of every level
 // right now, i figure it out myself
 //
-void AM_LevelInit(void)
+function AM_LevelInit(): void
 {
-    leveljuststarted = 0;
+    am_map.leveljuststarted = 0;
 
-    f_x = f_y = 0;
-    f_w = finit_width;
-    f_h = finit_height;
+    am_map.f_x = am_map.f_y = 0;
+    am_map.f_w = am_map.finit_width;
+    am_map.f_h = am_map.finit_height;
 
     AM_clearMarks();
 
     AM_findMinMaxBoundaries();
-    scale_mtof = FixedDiv(min_scale_mtof, (int) (0.7*FRACUNIT));
-    if (scale_mtof > max_scale_mtof)
-    scale_mtof = min_scale_mtof;
-    scale_ftom = FixedDiv(FRACUNIT, scale_mtof);
+    am_map.scale_mtof = FixedDiv(am_map.min_scale_mtof, Math.floor(0.7*FRACUNIT);
+    if (am_map.scale_mtof > am_map.max_scale_mtof)
+        am_map.scale_mtof = am_map.min_scale_mtof;
+    am_map.scale_ftom = FixedDiv(FRACUNIT, am_map.scale_mtof);
 }
 
 
@@ -614,30 +621,30 @@ void AM_LevelInit(void)
 //
 //
 //
-void AM_Stop (void)
+function AM_Stop (): void
 {
-    static event_t st_notify = { 0, ev_keyup, AM_MSGEXITED };
+    am_map.st_notify = { 0, ev_keyup, AM_MSGEXITED };  //static event_t st_notify = { 0, ev_keyup, AM_MSGEXITED };
 
     AM_unloadPics();
-    automapactive = false;
-    ST_Responder(&st_notify);
-    stopped = true;
+    am_map.automapactive = false;
+    ST_Responder(am_map.st_notify);
+    am_map.stopped = true;
 }
 
 //
 //
 //
-void AM_Start (void)
+function AM_Start (): void
 {
-    static int lastlevel = -1, lastepisode = -1;
+    am_map.lastlevel = -1; am_map.lastepisode = -1;
 
-    if (!stopped) AM_Stop();
-    stopped = false;
-    if (lastlevel != gamemap || lastepisode != gameepisode)
+    if (!am_map.stopped) AM_Stop();
+    am_map.stopped = false;
+    if (am_map.lastlevel != gamemap || am_map.lastepisode != gameepisode)
     {
     AM_LevelInit();
-    lastlevel = gamemap;
-    lastepisode = gameepisode;
+    am_map.lastlevel = gamemap;
+    am_map.lastepisode = gameepisode;
     }
     AM_initVariables();
     AM_loadPics();
@@ -646,20 +653,20 @@ void AM_Start (void)
 //
 // set the window scale to the maximum size
 //
-void AM_minOutWindowScale(void)
+function AM_minOutWindowScale(): void
 {
-    scale_mtof = min_scale_mtof;
-    scale_ftom = FixedDiv(FRACUNIT, scale_mtof);
+    am_map.scale_mtof = am_map.min_scale_mtof;
+    am_map.scale_ftom = FixedDiv(FRACUNIT, am_map.scale_mtof);
     AM_activateNewScale();
 }
 
 //
 // set the window scale to the minimum size
 //
-void AM_maxOutWindowScale(void)
+function AM_maxOutWindowScale(): void
 {
-    scale_mtof = max_scale_mtof;
-    scale_ftom = FixedDiv(FRACUNIT, scale_mtof);
+    am_map.scale_mtof = am_map.max_scale_mtof;
+    am_map.scale_ftom = FixedDiv(FRACUNIT, am_map.scale_mtof);
     AM_activateNewScale();
 }
 
@@ -667,83 +674,83 @@ void AM_maxOutWindowScale(void)
 //
 // Handle events (user inputs) in automap mode
 //
-boolean
+function
 AM_Responder
-( event_t*    ev )
+( ev:   event_t ): boolean
 {
 
-    int rc;
-    static int cheatstate=0;
-    static int bigstate=0;
-    static char buffer[20];
+    var rc: boolean;
+    am_map.cheatstate=0;
+    am_map.bigstate=0;
+    //am_map.static char buffer[20];
 
     rc = false;
 
     if (!automapactive)
     {
-    if (ev->type == ev_keydown && ev->data1 == AM_STARTKEY)
-    {
-        AM_Start ();
-        viewactive = false;
-        rc = true;
-    }
+        if (ev.type == ev_keydown && ev.data1 == AM_STARTKEY)
+        {
+            AM_Start ();
+            viewactive = false;
+            rc = true;
+        }
     }
 
-    else if (ev->type == ev_keydown)
+    else if (ev.type == ev_keydown)
     {
 
     rc = true;
-    switch(ev->data1)
+    switch(ev.data1)
     {
       case AM_PANRIGHTKEY: // pan right
-        if (!followplayer) m_paninc.x = FTOM(F_PANINC);
+        if (!am_map.followplayer) am_map.m_paninc.x = FTOM(F_PANINC);
         else rc = false;
         break;
       case AM_PANLEFTKEY: // pan left
-        if (!followplayer) m_paninc.x = -FTOM(F_PANINC);
+        if (!am_map.followplayer) am_map.m_paninc.x = -FTOM(F_PANINC);
         else rc = false;
         break;
       case AM_PANUPKEY: // pan up
-        if (!followplayer) m_paninc.y = FTOM(F_PANINC);
+        if (!am_map.followplayer) am_map.m_paninc.y = FTOM(F_PANINC);
         else rc = false;
         break;
       case AM_PANDOWNKEY: // pan down
-        if (!followplayer) m_paninc.y = -FTOM(F_PANINC);
+        if (!am_map.followplayer) am_map.m_paninc.y = -FTOM(F_PANINC);
         else rc = false;
         break;
       case AM_ZOOMOUTKEY: // zoom out
-        mtof_zoommul = M_ZOOMOUT;
-        ftom_zoommul = M_ZOOMIN;
+        am_map.mtof_zoommul = M_ZOOMOUT;
+        am_map.ftom_zoommul = M_ZOOMIN;
         break;
       case AM_ZOOMINKEY: // zoom in
-        mtof_zoommul = M_ZOOMIN;
-        ftom_zoommul = M_ZOOMOUT;
+        am_map.mtof_zoommul = M_ZOOMIN;
+        am_map.ftom_zoommul = M_ZOOMOUT;
         break;
       case AM_ENDKEY:
-        bigstate = 0;
+        am_map.bigstate = 0;
         viewactive = true;
         AM_Stop ();
         break;
       case AM_GOBIGKEY:
-        bigstate = !bigstate;
-        if (bigstate)
+        am_map.bigstate = !am_map.bigstate;
+        if (am_map.bigstate)
         {
-        AM_saveScaleAndLoc();
-        AM_minOutWindowScale();
+            AM_saveScaleAndLoc();
+            AM_minOutWindowScale();
         }
         else AM_restoreScaleAndLoc();
         break;
       case AM_FOLLOWKEY:
-        followplayer = !followplayer;
-        f_oldloc.x = MAXINT;
-        plr->message = followplayer ? AMSTR_FOLLOWON : AMSTR_FOLLOWOFF;
+        am_map.followplayer = !am_map.followplayer;
+        am_map.f_oldloc.x = MAXINT;
+        am_map.plr.message = am_map.followplayer ? AMSTR_FOLLOWON : AMSTR_FOLLOWOFF;
         break;
       case AM_GRIDKEY:
-        grid = !grid;
-        plr->message = grid ? AMSTR_GRIDON : AMSTR_GRIDOFF;
+        am_map.grid = !am_map.grid;
+        am_map.plr.message = am_map.grid ? AMSTR_GRIDON : AMSTR_GRIDOFF;
         break;
       case AM_MARKKEY:
-        sprintf(buffer, "%s %d", AMSTR_MARKEDSPOT, markpointnum);
+        sprintf(am_map.buffer, "%s %d", AMSTR_MARKEDSPOT, am_map.markpointnum);//:::CONTINUE:::
         plr->message = buffer;
         AM_addMark();
         break;
