@@ -7,20 +7,28 @@ if (typeof __AMMAP_H__ == "undefined"){
     
     
     // Called by main loop.
-    export function AM_Responder(ev:event_t):  boolean;
+    export declare function AM_Responder(ev:event_t):  boolean;
     
     // Called by main loop.
-    export function AM_Ticker (): void;
+    export declare function AM_Ticker (): void;
     
     // Called by main loop,
     // called instead of view drawer if automap active.
-    export function AM_Drawer (): void;
+    export declare function AM_Drawer (): void;
     
     // Called to force the automap to quit
     // if the level is completed while it is up.
-    export function AM_Stop (): void;
+    export declare function AM_Stop (): void;
     
-    
+    /*
+    import {AM_MSGHEADER} from "am_map.h";
+    import {AM_MSGENTERED} from "am_map.h";
+    import {AM_MSGEXITED} from "am_map.h";
+    import {AM_Responder} from "am_map.h"
+    import {AM_Ticker} from "am_map.h";
+    import {AM_Drawer} from "am_map.h";
+    import {AM_Stop} from "am_map.h";
+    */
 }
 
 
