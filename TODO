@@ -1,3 +1,38 @@
+=================================================================== Long Term Goals ===================================================================================
+
+1. Translate between C and TS.  The first step is an exact translation.  No optimizations or changes yet, just wanna make sure it works.
+
+2. Optimize it.
+
+3. Add new features, while still staying true to the original engine.  You should be able to go between original unchanged doom, full modern port features features, and anywhere inbetween.
+  Potential Features:
+    OpenGL
+    Realtime Lighting
+    VR
+    Changeable Controls
+    Save Functionality (MUST BE COMPATIBLE WITH ORIGINAL SAVE FORMAT) (if it passes maybe use the new native file system api for this)
+    Functional Netplay (Both Co-op and Deathmatch)
+      New netplay gamemodes? (maybe something like doom 2016 or eternal, either in deathmatch levels or perhaps in normal levels, trying to stop slayer from progressing)
+    Compatibility with modern mods
+    Replay Compatibility
+    True RNG (maybe let players edit rng table?)
+    Cheats (noclip, fly, god, ect)
+    Texture Packs (potentially including hd)
+    Level Editor?
+
+4. Make it easy to use and embed
+  The point of this project is to make it possible to play doom online.  It needs to be flexable and capable of use on any website that wants to use it.
+
+
+
+======================================================================== Actual TODO ================================================================================
+
+- Find solution to scope problems
+- Find solution to type problems
+
+======================================================================  Original TODO  =============================================================================
+
+This was left here for ideas for possible improvements once translation is complete
 
 - create Web repository for sources, patches,
   news, and pointer to doom-editing mailing
