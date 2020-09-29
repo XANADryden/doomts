@@ -271,7 +271,11 @@ interface am_map_t {
     
     cheatstate?:number;
     bigstate?:  number;
-    buffer?  :[char, char, char, char, char, char, char, char, char, char, char, char, char, char, char, char, char, char, char, char];
+    buffer?  :  [char, char, char, char, char, char, char, char, char, char, char, char, char, char, char, char, char, char, char, char];
+    
+    nexttic?:        number;     // Literally just said `static nexttic = 0;`. wtf
+    litelevels?:     number[];   // static int litelevels[] = { 0, 4, 7, 10, 12, 13, 15, 15 };
+    litelevelscnt?:  number;
 }
 
 var am_map :am_map_t = {
@@ -802,36 +806,36 @@ AM_Responder
 //
 // Zooming
 //
-function AM_changeWindowScale()//:::CONTINUE:::
+function AM_changeWindowScale(): void
 {
 
     // Change the scaling multipliers
-    scale_mtof = FixedMul(scale_mtof, mtof_zoommul);
-    scale_ftom = FixedDiv(FRACUNIT, scale_mtof);
+    am_map.scale_mtof = FixedMul(am_map.scale_mtof, am_map.mtof_zoommul);
+    am_map.scale_ftom = FixedDiv(FRACUNIT, am_map.scale_mtof);
 
-    if (scale_mtof < min_scale_mtof)
-    AM_minOutWindowScale();
-    else if (scale_mtof > max_scale_mtof)
-    AM_maxOutWindowScale();
+    if (am_map.scale_mtof < am_map.min_scale_mtof)
+        AM_minOutWindowScale();
+    else if (am_map.scale_mtof > am_map.max_scale_mtof)
+        AM_maxOutWindowScale();
     else
-    AM_activateNewScale();
+      AM_activateNewScale();
 }
 
 
 //
 //
 //
-void AM_doFollowPlayer(void)
+function AM_doFollowPlayer(): void
 {
 
-    if (f_oldloc.x != plr->mo->x || f_oldloc.y != plr->mo->y)
+    if (am_map.f_oldloc.x != am_map.plr.mo.x || am_map.f_oldloc.y != am_map.plr.mo.y)
     {
-    m_x = FTOM(MTOF(plr->mo->x)) - m_w/2;
-    m_y = FTOM(MTOF(plr->mo->y)) - m_h/2;
-    m_x2 = m_x + m_w;
-    m_y2 = m_y + m_h;
-    f_oldloc.x = plr->mo->x;
-    f_oldloc.y = plr->mo->y;
+    am_map.m_x = FTOM(MTOF(am_map.plr.mo.x)) - am_map.m_w/2;
+    am_map.m_y = FTOM(MTOF(am_map.plr.mo.y)) - am_map.m_h/2;
+    am_map.m_x2 = am_map.m_x + am_map.m_w;
+    am_map.m_y2 = am_map.m_y + am_map.m_h;
+    am_map.f_oldloc.x = am_map.plr.mo.x;
+    am_map.f_oldloc.y = am_map.plr.mo.y;
 
     //  m_x = FTOM(MTOF(plr->mo->x - m_w/2));
     //  m_y = FTOM(MTOF(plr->mo->y - m_h/2));
@@ -845,11 +849,11 @@ void AM_doFollowPlayer(void)
 //
 //
 //
-void AM_updateLightLev(void)
+function AM_updateLightLev(): void //:::CONTINUE:::
 {
-    static nexttic = 0;
+    am_map.nexttic = 0;                        // static nexttic = 0;
     //static int litelevels[] = { 0, 3, 5, 6, 6, 7, 7, 7 };
-    static int litelevels[] = { 0, 4, 7, 10, 12, 14, 15, 15 };
+    static int litelevels[] = { 0, 4, 7, 10, 12, 14, 15, 15 };  //static int litelevels[] = { 0, 4, 7, 10, 12, 13, 15, 15 };
     static int litelevelscnt = 0;
    
     // Change light level
