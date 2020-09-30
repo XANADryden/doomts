@@ -278,6 +278,10 @@ interface am_map_t {
     litelevelscnt?:  number;
     
     fuck?:  number;             // Yes it exists
+    
+    fl?:    fline_t;
+    
+    l?:     mline_t;
 }
 
 var am_map :am_map_t = {
@@ -927,11 +931,12 @@ AM_clipMline
     };
     
     //three registers
-    register    outcode1 = 0;
-    register    outcode2 = 0;
-    register    outside;
+    let    outcode1:    number = 0;        // I know this isn't how registers function but there's fast TS equivalent, and they aren't reused.
+    let    outcode2:    number = 0;        // Since half the purpose of register is to make things faster, we don't want to expand it
+    let    outside:     number;
     
-    var tmp:    fpoint_t,
+    var
+    tmp:    fpoint_t,
     dx:     number,
     dy:     number;
 
@@ -1047,77 +1052,79 @@ AM_clipMline
 //
 // Classic Bresenham w/ whatever optimizations needed for speed
 //
-void
+function
 AM_drawFline
-( fline_t*    fl,
-  int        color )
+( fl:       fline_t,
+  color:    number ): void
 {
-    register int x;
-    register int y;
-    register int dx;
-    register int dy;
-    register int sx;
-    register int sy;
-    register int ax;
-    register int ay;
-    register int d;
+    // A buch of register ints
+    let 
+    x:  number,
+    y:  number,
+    dx: number,
+    dy: number,
+    sx: number,
+    sy: number,
+    ax: number,
+    ay: number,
+    d:  number;
     
     am_map.fuck = 0;
 
     // For debugging only
-    if (      fl->a.x < 0 || fl->a.x >= f_w
-       || fl->a.y < 0 || fl->a.y >= f_h
-       || fl->b.x < 0 || fl->b.x >= f_w
-       || fl->b.y < 0 || fl->b.y >= f_h)
+    if (  fl.a.x < 0 || fl.a.x >= am_map.f_w
+       || fl.a.y < 0 || fl.a.y >= am_map.f_h
+       || fl.b.x < 0 || fl.b.x >= am_map.f_w
+       || fl.b.y < 0 || fl.b.y >= am_map.f_h)
     {
-    fprintf(stderr, "fuck %d \r", fuck++);
+    fprintf(stderr, "fuck %d \r", am_map.fuck++);
     return;
     }
 
-#define PUTDOT(xx,yy,cc) fb[(yy)*f_w+(xx)]=(cc)
+    function PUTDOT(xx: number, yy: number, cc: number): void {am_map.fb[ (yy) * am_map.f_w + (xx) ] = (cc)}
 
-    dx = fl->b.x - fl->a.x;
+    dx = fl.b.x - fl.a.x;
     ax = 2 * (dx<0 ? -dx : dx);
     sx = dx<0 ? -1 : 1;
 
-    dy = fl->b.y - fl->a.y;
+    dy = fl.b.y - fl.a.y;
     ay = 2 * (dy<0 ? -dy : dy);
     sy = dy<0 ? -1 : 1;
 
-    x = fl->a.x;
-    y = fl->a.y;
+    x = fl.a.x;
+    y = fl.a.y;
 
     if (ax > ay)
     {
-    d = ay - ax/2;
-    while (1)
-    {
-        PUTDOT(x,y,color);
-        if (x == fl->b.x) return;
-        if (d>=0)
+        d = ay - ax/2;
+        while (1)
         {
-        y += sy;
-        d -= ax;
+            PUTDOT(x,y,color);
+            if (x == fl.b.x) return;
+            if (d >= 0)
+            {
+                y += sy;
+                d -= ax;
+            }
+            x += sx;
+            d += ay;
         }
-        x += sx;
-        d += ay;
-    }
     }
     else
     {
-    d = ax - ay/2;
-    while (1)
-    {
-        PUTDOT(x, y, color);
-        if (y == fl->b.y) return;
-        if (d >= 0)
+        d = ax - ay/2;
+        while (1)
         {
-        x += sx;
-        d -= ay;
+            PUTDOT(x, y, color);
+            if (y == fl.b.y) return;
+            if (d >= 0)
+            {
+                x += sx;
+                d -= ay;
+            }
+            y += sy;
+            d += ax;
         }
-        y += sy;
-        d += ax;
-    }
     }
 }
 
@@ -1125,15 +1132,15 @@ AM_drawFline
 //
 // Clip lines, draw visible part sof lines.
 //
-void
+function
 AM_drawMline
-( mline_t*    ml,
-  int        color )
+( ml:       mline_t,
+  color:    number ): void
 {
-    static fline_t fl;
+    //static fline_t fl;
 
-    if (AM_clipMline(ml, &fl))
-    AM_drawFline(&fl, color); // draws it on frame buffer using fb coords
+    if (AM_clipMline(ml, am_map.fl))
+        AM_drawFline(am_map.fl, color); // draws it on frame buffer using fb coords
 }
 
 
@@ -1141,44 +1148,44 @@ AM_drawMline
 //
 // Draws flat (floor/ceiling tile) aligned grid lines.
 //
-void AM_drawGrid(int color)
+function AM_drawGrid(color: number): void
 {
-    fixed_t x, y;
-    fixed_t start, end;
-    mline_t ml;
+    let x: fixed_t, y: fixed_t;
+    let start: fixed_t, end: fixed_t;
+    let ml: mline_t;
 
     // Figure out start of vertical gridlines
-    start = m_x;
+    start = am_map.m_x;
     if ((start-bmaporgx)%(MAPBLOCKUNITS<<FRACBITS))
     start += (MAPBLOCKUNITS<<FRACBITS)
         - ((start-bmaporgx)%(MAPBLOCKUNITS<<FRACBITS));
-    end = m_x + m_w;
+    end = am_map.m_x + am_map.m_w;
 
     // draw vertical gridlines
-    ml.a.y = m_y;
-    ml.b.y = m_y+m_h;
-    for (x=start; x<end; x+=(MAPBLOCKUNITS<<FRACBITS))
+    ml.a.y = am_map.m_y;
+    ml.b.y = am_map.m_y+am_map.m_h;
+    for (x = start; x < end; x += (MAPBLOCKUNITS<<FRACBITS))
     {
-    ml.a.x = x;
-    ml.b.x = x;
-    AM_drawMline(&ml, color);
+        ml.a.x = x;
+        ml.b.x = x;
+        AM_drawMline(ml, color);
     }
 
     // Figure out start of horizontal gridlines
-    start = m_y;
+    start = am_map.m_y;
     if ((start-bmaporgy)%(MAPBLOCKUNITS<<FRACBITS))
     start += (MAPBLOCKUNITS<<FRACBITS)
         - ((start-bmaporgy)%(MAPBLOCKUNITS<<FRACBITS));
-    end = m_y + m_h;
+    end = am_map.m_y + am_map.m_h;
 
     // draw horizontal gridlines
-    ml.a.x = m_x;
-    ml.b.x = m_x + m_w;
-    for (y=start; y<end; y+=(MAPBLOCKUNITS<<FRACBITS))
+    ml.a.x = am_map.m_x;
+    ml.b.x = am_map.m_x + am_map.m_w;
+    for (y = start; y < end; y += (MAPBLOCKUNITS<<FRACBITS))
     {
-    ml.a.y = y;
-    ml.b.y = y;
-    AM_drawMline(&ml, color);
+        ml.a.y = y;
+        ml.b.y = y;
+        AM_drawMline(ml, color);
     }
 
 }
@@ -1187,53 +1194,47 @@ void AM_drawGrid(int color)
 // Determines visible lines, draws them.
 // This is LineDef based, not LineSeg based.
 //
-void AM_drawWalls(void)
+function AM_drawWalls(): void
 {
-    int i;
-    static mline_t l;
+    let i: number;
+    //static mline_t l;
 
-    for (i=0;i<numlines;i++)
+    for (i = 0; i < numlines; i++)
     {
-    l.a.x = lines[i].v1->x;
-    l.a.y = lines[i].v1->y;
-    l.b.x = lines[i].v2->x;
-    l.b.y = lines[i].v2->y;
-    if (cheating || (lines[i].flags & ML_MAPPED))
-    {
-        if ((lines[i].flags & LINE_NEVERSEE) && !cheating)
-        continue;
-        if (!lines[i].backsector)
+        am_map.l.a.x = lines[i].v1.x;
+        am_map.l.a.y = lines[i].v1.y;
+        am_map.l.b.x = lines[i].v2.x;
+        am_map.l.b.y = lines[i].v2.y;
+        if (am_map.cheating || (lines[i].flags & ML_MAPPED))
         {
-        AM_drawMline(&l, WALLCOLORS+lightlev);
+            if ((lines[i].flags & LINE_NEVERSEE) && !am_map.cheating)
+                continue;
+            if (!lines[i].backsector) 
+                AM_drawMline(am_map.l, WALLCOLORS + am_map.lightlev);
+            else
+            {
+                if (lines[i].special == 39) // teleporters
+                    AM_drawMline(am_map.l, WALLCOLORS+WALLRANGE/2);
+                
+                else if (lines[i].flags & ML_SECRET) // secret door
+                    if (am_map.cheating) AM_drawMline(am_map.l, SECRETWALLCOLORS + am_map.lightlev);
+                    else AM_drawMline(am_map.l, WALLCOLORS + am_map.lightlev);
+                
+                else if (lines[i].backsector.floorheight
+                       != lines[i].frontsector.floorheight)
+                    AM_drawMline(am_map.l, FDWALLCOLORS + am_map.lightlev); // floor level change
+                
+                else if (lines[i].backsector.ceilingheight
+                   != lines[i].frontsector.ceilingheight)
+                    AM_drawMline(am_map.l, CDWALLCOLORS+am_map.lightlev); // ceiling level change
+                
+                else if (am_map.cheating)
+                    AM_drawMline(am_map.l, TSWALLCOLORS+am_map.lightlev);
+                
+            }
         }
-        else
-        {
-        if (lines[i].special == 39)
-        { // teleporters
-            AM_drawMline(&l, WALLCOLORS+WALLRANGE/2);
-        }
-        else if (lines[i].flags & ML_SECRET) // secret door
-        {
-            if (cheating) AM_drawMline(&l, SECRETWALLCOLORS + lightlev);
-            else AM_drawMline(&l, WALLCOLORS+lightlev);
-        }
-        else if (lines[i].backsector->floorheight
-               != lines[i].frontsector->floorheight) {
-            AM_drawMline(&l, FDWALLCOLORS + lightlev); // floor level change
-        }
-        else if (lines[i].backsector->ceilingheight
-               != lines[i].frontsector->ceilingheight) {
-            AM_drawMline(&l, CDWALLCOLORS+lightlev); // ceiling level change
-        }
-        else if (cheating) {
-            AM_drawMline(&l, TSWALLCOLORS+lightlev);
-        }
-        }
-    }
-    else if (plr->powers[pw_allmap])
-    {
-        if (!(lines[i].flags & LINE_NEVERSEE)) AM_drawMline(&l, GRAYS+3);
-    }
+        else if (am_map.plr.powers[pw_allmap])
+            if (!(lines[i].flags & LINE_NEVERSEE)) AM_drawMline(am_map.l, GRAYS+3);
     }
 }
 
@@ -1242,23 +1243,23 @@ void AM_drawWalls(void)
 // Rotation in 2D.
 // Used to rotate player arrow line character.
 //
-void
+function
 AM_rotate
-( fixed_t*    x,
-  fixed_t*    y,
-  angle_t    a )
+( x:    fixed_t,//:::CONTINUE:::
+  y:    fixed_t,
+  a:    angle_t ): void
 {
-    fixed_t tmpx;
+    let tmpx: fixed_t;
 
     tmpx =
-    FixedMul(*x,finecosine[a>>ANGLETOFINESHIFT])
-    - FixedMul(*y,finesine[a>>ANGLETOFINESHIFT]);
+    FixedMul(x,finecosine[a>>ANGLETOFINESHIFT])     //angle to fine shidt
+    - FixedMul(y,finesine[a>>ANGLETOFINESHIFT]);
     
-    *y   =
-    FixedMul(*x,finesine[a>>ANGLETOFINESHIFT])
-    + FixedMul(*y,finecosine[a>>ANGLETOFINESHIFT]);
+    y   =
+    FixedMul(x,finesine[a>>ANGLETOFINESHIFT])
+    + FixedMul(y,finecosine[a>>ANGLETOFINESHIFT]);
 
-    *x = tmpx;
+    x = tmpx;
 }
 
 void
@@ -1323,11 +1324,11 @@ void AM_drawPlayers(void)
     if (cheating)
         AM_drawLineCharacter
         (cheat_player_arrow, NUMCHEATPLYRLINES, 0,
-         plr->mo->angle, WHITE, plr->mo->x, plr->mo->y);
+         plr.mo.angle, WHITE, plr.mo.x, plr.mo.y);
     else
         AM_drawLineCharacter
-        (player_arrow, NUMPLYRLINES, 0, plr->mo->angle,
-         WHITE, plr->mo->x, plr->mo->y);
+        (player_arrow, NUMPLYRLINES, 0, plr.mo.angle,
+         WHITE, plr.mo.x, plr.mo.y);
     return;
     }
 
@@ -1342,14 +1343,14 @@ void AM_drawPlayers(void)
     if (!playeringame[i])
         continue;
 
-    if (p->powers[pw_invisibility])
+    if (p.powers[pw_invisibility])
         color = 246; // *close* to black
     else
         color = their_colors[their_color];
     
     AM_drawLineCharacter
-        (player_arrow, NUMPLYRLINES, 0, p->mo->angle,
-         color, p->mo->x, p->mo->y);
+        (player_arrow, NUMPLYRLINES, 0, p.mo.angle,
+         color, p.mo.x, p.mo.y);
     }
 
 }
@@ -1369,8 +1370,8 @@ AM_drawThings
     {
         AM_drawLineCharacter
         (thintriangle_guy, NUMTHINTRIANGLEGUYLINES,
-         16<<FRACBITS, t->angle, colors+lightlev, t->x, t->y);
-        t = t->snext;
+         16<<FRACBITS, t.angle, colors+lightlev, t.x, t.y);
+        t = t.snext;
     }
     }
 }
